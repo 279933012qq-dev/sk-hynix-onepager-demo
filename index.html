@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SK Hynix 公司一页纸 Demo</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #657386;
+      --line: #dce3ea;
+      --panel: #ffffff;
+      --bg: #f5f7fa;
+      --blue: #2266d1;
+      --cyan: #00a6b2;
+      --green: #15945b;
+      --amber: #c57d13;
+      --red: #cf3e3e;
+      --violet: #7059c8;
+      --shadow: 0 12px 30px rgba(24, 39, 75, .08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      letter-spacing: 0;
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items: stretch;
+      margin-bottom: 14px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .identity {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 156px;
+    }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    h1 {
+      margin: 8px 0 6px;
+      font-size: 30px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 26px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #eef5ff;
+      color: #1955aa;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .badge.green { background: #e9f8ef; color: #137343; }
+    .badge.amber { background: #fff4df; color: #996012; }
+    .badge.red { background: #ffecec; color: #b33434; }
+
+    .thesis {
+      padding: 16px 18px;
+      min-height: 156px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .asof {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .logic-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 11px;
+      min-height: 95px;
+      background: linear-gradient(180deg, #fff, #f9fbfd);
+    }
+
+    .logic-card strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .logic-card p {
+      margin: 0;
+      color: #425166;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .quote {
+      padding: 16px 18px;
+      min-height: 156px;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 8px 0 14px;
+    }
+
+    .price .num {
+      font-size: 28px;
+      font-weight: 760;
+    }
+
+    .price .chg {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .mini-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .mini {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+
+    .mini span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .mini b {
+      font-size: 14px;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 1.35fr .95fr;
+      gap: 14px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .block {
+      padding: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th {
+      color: var(--muted);
+      text-align: left;
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 6px;
+      white-space: nowrap;
+    }
+
+    td {
+      border-bottom: 1px solid #edf1f5;
+      padding: 9px 6px;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    .num-cell { text-align: right; font-variant-numeric: tabular-nums; }
+    .tag {
+      display: inline-flex;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #eef1f5;
+      color: #3a4758;
+      font-size: 11px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .tag.green { background: #e8f7ef; color: var(--green); }
+    .tag.amber { background: #fff4df; color: var(--amber); }
+    .tag.red { background: #ffecec; color: var(--red); }
+    .tag.blue { background: #eaf2ff; color: var(--blue); }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: 122px 1fr 80px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .metric-row:last-child { border-bottom: none; }
+    .metric-name { font-size: 12px; font-weight: 700; }
+    .metric-note { color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #e8edf3;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+    .bar i {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+    }
+    .value { text-align: right; font-size: 13px; font-weight: 760; }
+
+    .indicator-hub {
+      margin-bottom: 14px;
+      padding: 16px;
+    }
+
+    .indicator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .indicator-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 12px;
+      background: linear-gradient(180deg, #fff, #fbfcfe);
+      min-height: 258px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .indicator-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .indicator-head h3 {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .indicator-meta {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+      min-height: 46px;
+    }
+
+    .sparkline {
+      height: 106px;
+      border: 1px solid #e6edf4;
+      border-radius: 6px;
+      background: #fbfdff;
+      padding: 6px;
+    }
+
+    .history-note {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .history-note span {
+      border-top: 1px solid #edf1f5;
+      padding-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .history-note b {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      margin-bottom: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .case {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 12px;
+    }
+
+    .case h3 {
+      margin: 0 0 10px;
+      font-size: 13px;
+    }
+
+    .case .big {
+      font-size: 22px;
+      font-weight: 780;
+      margin-bottom: 4px;
+    }
+
+    .case p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .chart {
+      height: 168px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px;
+      background: #fbfcfe;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .tech {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 11px;
+      min-height: 84px;
+    }
+
+    .tech span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .tech b {
+      display: block;
+      margin-top: 6px;
+      font-size: 17px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .signal {
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1180px) {
+      .topbar, .main { grid-template-columns: 1fr; }
+      .thesis-grid, .case-grid, .indicator-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 12px; }
+      h1 { font-size: 24px; }
+      .metric-row { grid-template-columns: 1fr; }
+      .value { text-align: left; }
+      .tech-grid { grid-template-columns: 1fr; }
+      table { font-size: 11px; }
+      th, td { padding: 7px 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="topbar">
+      <div class="panel identity">
+        <div>
+          <div class="kicker">Company One-Pager Demo</div>
+          <h1>SK Hynix</h1>
+          <div class="subtitle">000660.KS | 韩国存储龙头 | DRAM / NAND / HBM</div>
+        </div>
+        <div class="badges">
+          <span class="badge green">投资结论: 继续跟踪</span>
+          <span class="badge">主线: AI HBM</span>
+          <span class="badge amber">节奏: 高波动</span>
+        </div>
+      </div>
+
+      <div class="panel quote">
+        <div class="section-title">
+          <h2>行情快照</h2>
+          <span class="asof">延迟源</span>
+        </div>
+        <div class="price">
+          <span class="num">₩2,116,000</span>
+          <span class="chg">-3.86%</span>
+        </div>
+        <div class="mini-metrics">
+          <div class="mini"><span>52 周区间</span><b>₩245k - ₩2.987m</b></div>
+          <div class="mini"><span>P/E TTM</span><b>19.9x</b></div>
+          <div class="mini"><span>市值</span><b>约 ₩1,501T</b></div>
+          <div class="mini"><span>成交量</span><b>4.69m</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel thesis">
+      <div class="section-title">
+        <h2>投资逻辑</h2>
+        <span class="asof">样机版 | 2026-07-08</span>
+      </div>
+      <div class="thesis-grid">
+        <article class="logic-card">
+          <strong>1. AI 服务器推动 HBM 量价景气</strong>
+          <p>周报强调 CSP 资本开支与 AI 算力需求仍是半导体主线，海力士的核心验证点应落在 HBM 订单、ASP 和产能转换。</p>
+        </article>
+        <article class="logic-card">
+          <strong>2. 存储上行周期提升盈利弹性</strong>
+          <p>若 DRAM 价格、库存周转和合约价继续改善，利润率对收入增长具备放大效应。</p>
+        </article>
+        <article class="logic-card">
+          <strong>3. 估值与技术面决定交易节奏</strong>
+          <p>股价年内涨幅较大，需同时跟踪预期上修、估值消化、均线位置和背离信号。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel indicator-hub">
+      <div class="section-title">
+        <h2>逻辑驱动指标跟踪</h2>
+        <span class="asof">紧跟投资逻辑 | 有历史数据的指标用时间序列展示</span>
+      </div>
+      <div class="indicator-grid">
+        <article class="indicator-card">
+          <div class="indicator-head">
+            <h3>DRAM 合约价 QoQ</h3>
+            <span class="tag green">月度</span>
+          </div>
+          <div class="indicator-meta">验证存储上行周期是否延续。若合约价连续上行，说明服务器与 AI 需求能抵消消费端波动。</div>
+          <div class="sparkline">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="DRAM 合约价 QoQ 历史走势">
+              <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="50" x2="268" y2="50" stroke="#edf1f5" stroke-dasharray="3 3" />
+              <polyline points="28,66 62,72 96,60 130,52 164,45 198,37 232,30 264,24" fill="none" stroke="#15945b" stroke-width="3" />
+              <g fill="#15945b">
+                <circle cx="28" cy="66" r="3" /><circle cx="62" cy="72" r="3" /><circle cx="96" cy="60" r="3" /><circle cx="130" cy="52" r="3" />
+                <circle cx="164" cy="45" r="3" /><circle cx="198" cy="37" r="3" /><circle cx="232" cy="30" r="3" /><circle cx="264" cy="24" r="3" />
+              </g>
+              <g font-size="9" fill="#657386">
+                <text x="28" y="95" text-anchor="middle">24Q4</text><text x="130" y="95" text-anchor="middle">25Q2</text><text x="264" y="95" text-anchor="middle">26Q2</text>
+                <text x="16" y="22" text-anchor="end">+10%</text><text x="16" y="53" text-anchor="end">0</text><text x="16" y="84" text-anchor="end">-10%</text>
+              </g>
+            </svg>
+          </div>
+          <div class="history-note">
+            <span><b>最新</b>+8%</span>
+            <span><b>趋势</b>连续改善</span>
+            <span><b>来源</b>报价/调研</span>
+          </div>
+        </article>
+
+        <article class="indicator-card">
+          <div class="indicator-head">
+            <h3>HBM 出货占比</h3>
+            <span class="tag blue">季度</span>
+          </div>
+          <div class="indicator-meta">验证 AI 客户拉货强度与产品结构升级，直接影响 ASP、毛利率和海力士相对竞争力。</div>
+          <div class="sparkline">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="HBM 出货占比历史走势">
+              <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
+              <rect x="42" y="64" width="24" height="18" rx="3" fill="#bcd5ff" />
+              <rect x="82" y="56" width="24" height="26" rx="3" fill="#8bb8ff" />
+              <rect x="122" y="47" width="24" height="35" rx="3" fill="#5b96f0" />
+              <rect x="162" y="38" width="24" height="44" rx="3" fill="#3378db" />
+              <rect x="202" y="29" width="24" height="53" rx="3" fill="#2266d1" />
+              <rect x="242" y="22" width="24" height="60" rx="3" fill="#174faa" />
+              <g font-size="9" fill="#657386">
+                <text x="54" y="95" text-anchor="middle">25Q1</text><text x="134" y="95" text-anchor="middle">25Q3</text><text x="254" y="95" text-anchor="middle">26Q2</text>
+                <text x="16" y="22" text-anchor="end">高</text><text x="16" y="84" text-anchor="end">低</text>
+              </g>
+            </svg>
+          </div>
+          <div class="history-note">
+            <span><b>最新</b>高位</span>
+            <span><b>趋势</b>上行</span>
+            <span><b>来源</b>财报/法说会</span>
+          </div>
+        </article>
+
+        <article class="indicator-card">
+          <div class="indicator-head">
+            <h3>经营利润率</h3>
+            <span class="tag green">季度</span>
+          </div>
+          <div class="indicator-meta">验证涨价和产品结构改善是否真正进入利润表。若收入增长但利润率不扩张，需要复盘成本和良率。</div>
+          <div class="sparkline">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="经营利润率历史走势">
+              <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
+              <polyline points="28,72 62,67 96,56 130,46 164,34 198,28 232,25 264,23" fill="none" stroke="#00a6b2" stroke-width="3" />
+              <path d="M28 72 L62 67 L96 56 L130 46 L164 34 L198 28 L232 25 L264 23 L264 82 L28 82 Z" fill="rgba(0,166,178,.12)" />
+              <g font-size="9" fill="#657386">
+                <text x="28" y="95" text-anchor="middle">24Q3</text><text x="130" y="95" text-anchor="middle">25Q2</text><text x="264" y="95" text-anchor="middle">26Q1</text>
+                <text x="16" y="22" text-anchor="end">70%</text><text x="16" y="84" text-anchor="end">0</text>
+              </g>
+            </svg>
+          </div>
+          <div class="history-note">
+            <span><b>最新</b>扩张</span>
+            <span><b>趋势</b>改善</span>
+            <span><b>来源</b>财报</span>
+          </div>
+        </article>
+
+        <article class="indicator-card">
+          <div class="indicator-head">
+            <h3>EPS 上修扩散度</h3>
+            <span class="tag amber">周度</span>
+          </div>
+          <div class="indicator-meta">验证市场预期是否仍在上修。股价高位时，该指标比单纯 PE 更能判断是否还有预期差。</div>
+          <div class="sparkline">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="EPS 上修扩散度历史走势">
+              <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
+              <line x1="24" y1="50" x2="268" y2="50" stroke="#edf1f5" stroke-dasharray="3 3" />
+              <polyline points="28,70 56,62 84,48 112,40 140,32 168,30 196,36 224,42 252,38" fill="none" stroke="#7059c8" stroke-width="3" />
+              <g fill="#7059c8">
+                <circle cx="28" cy="70" r="3" /><circle cx="84" cy="48" r="3" /><circle cx="140" cy="32" r="3" /><circle cx="196" cy="36" r="3" /><circle cx="252" cy="38" r="3" />
+              </g>
+              <g font-size="9" fill="#657386">
+                <text x="28" y="95" text-anchor="middle">5月</text><text x="140" y="95" text-anchor="middle">6月</text><text x="252" y="95" text-anchor="middle">7月</text>
+                <text x="16" y="22" text-anchor="end">80%</text><text x="16" y="84" text-anchor="end">0</text>
+              </g>
+            </svg>
+          </div>
+          <div class="history-note">
+            <span><b>最新</b>64%</span>
+            <span><b>趋势</b>高位回落</span>
+            <span><b>来源</b>预测库</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="main">
+      <div class="stack">
+        <div class="panel block">
+          <div class="section-title">
+            <h2>盈利预测: Bear / Base / Bull</h2>
+            <span class="asof">示例模型</span>
+          </div>
+          <div class="case-grid">
+            <article class="case">
+              <h3>Bear</h3>
+              <div class="big">₩95T</div>
+              <span class="tag red">26E Revenue</span>
+              <p>HBM 价格回落，客户认证延后，DRAM 涨价斜率放缓。26E EPS: ₩154k，对应 13.7x。</p>
+            </article>
+            <article class="case">
+              <h3>Base</h3>
+              <div class="big">₩112T</div>
+              <span class="tag green">26E Revenue</span>
+              <p>HBM 出货顺利，DRAM 价格继续上行。26E EPS: ₩198k，对应 10.7x。</p>
+            </article>
+            <article class="case">
+              <h3>Bull</h3>
+              <div class="big">₩130T</div>
+              <span class="tag blue">26E Revenue</span>
+              <p>HBM4 加速放量，AI 客户扩单，利润率继续扩张。26E EPS: ₩242k，对应 8.7x。</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="panel block">
+          <div class="section-title">
+            <h2>5 家买方预测与估值</h2>
+            <span class="asof">demo 数据</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>机构</th>
+                <th class="num-cell">26E EPS</th>
+                <th class="num-cell">PE</th>
+                <th class="num-cell">目标价</th>
+                <th>观点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Buy-side A</td><td class="num-cell">₩185k</td><td class="num-cell">11.4x</td><td class="num-cell">₩2.45m</td><td>HBM 订单确定性高</td></tr>
+              <tr><td>Buy-side B</td><td class="num-cell">₩198k</td><td class="num-cell">10.7x</td><td class="num-cell">₩2.60m</td><td>维持 Base</td></tr>
+              <tr><td>Buy-side C</td><td class="num-cell">₩211k</td><td class="num-cell">10.0x</td><td class="num-cell">₩2.85m</td><td>价格上修</td></tr>
+              <tr><td>Buy-side D</td><td class="num-cell">₩226k</td><td class="num-cell">9.4x</td><td class="num-cell">₩3.10m</td><td>看好 HBM4</td></tr>
+              <tr><td>Buy-side E</td><td class="num-cell">₩174k</td><td class="num-cell">12.2x</td><td class="num-cell">₩2.25m</td><td>担心高位波动</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel block">
+          <div class="section-title">
+            <h2>收入与 EPS 情景图</h2>
+            <span class="asof">2026E</span>
+          </div>
+          <div class="chart">
+            <svg viewBox="0 0 520 150" width="100%" height="100%" role="img" aria-label="Bear Base Bull 情景图">
+              <line x1="36" y1="124" x2="500" y2="124" stroke="#ccd5df" />
+              <line x1="36" y1="20" x2="36" y2="124" stroke="#ccd5df" />
+              <g font-size="11" fill="#657386">
+                <text x="26" y="128" text-anchor="end">0</text>
+                <text x="26" y="82" text-anchor="end">65</text>
+                <text x="26" y="28" text-anchor="end">130</text>
+              </g>
+              <g>
+                <rect x="86" y="48" width="44" height="76" rx="4" fill="#cf3e3e" />
+                <rect x="228" y="34" width="44" height="90" rx="4" fill="#15945b" />
+                <rect x="370" y="20" width="44" height="104" rx="4" fill="#2266d1" />
+                <polyline points="108,66 250,50 392,36" fill="none" stroke="#7059c8" stroke-width="3" />
+                <circle cx="108" cy="66" r="5" fill="#7059c8" />
+                <circle cx="250" cy="50" r="5" fill="#7059c8" />
+                <circle cx="392" cy="36" r="5" fill="#7059c8" />
+              </g>
+              <g font-size="12" fill="#17202a" font-weight="700">
+                <text x="108" y="142" text-anchor="middle">Bear</text>
+                <text x="250" y="142" text-anchor="middle">Base</text>
+                <text x="392" y="142" text-anchor="middle">Bull</text>
+              </g>
+              <g font-size="11" fill="#657386">
+                <text x="442" y="34">紫线: EPS</text>
+                <text x="442" y="50">柱: Revenue</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="panel block">
+          <div class="section-title">
+            <h2>技术面</h2>
+            <span class="asof">示例计算</span>
+          </div>
+          <div class="tech-grid">
+            <div class="tech"><span>当前股价</span><b>₩2.116m</b></div>
+            <div class="tech"><span>MA20 / MA60</span><b>2.28m / 1.79m</b></div>
+            <div class="tech"><span>60 日波动率</span><b>67%</b></div>
+            <div class="tech"><span>1 年夏普比率</span><b>2.1</b></div>
+            <div class="tech"><span>近 3 月最大回撤</span><b>-30%</b></div>
+            <div class="tech"><span>均线状态</span><b>短线跌破 MA20</b></div>
+          </div>
+        </div>
+
+        <div class="panel block">
+          <div class="section-title">
+            <h2>顶背离 / 底背离</h2>
+            <span class="asof">交易信号</span>
+          </div>
+          <div class="signal">
+            <div class="signal-item">
+              <span class="tag red">顶背离</span>
+              <div>股价接近 52 周高位后回落，若 RSI / MACD 未同步创新高，提示上涨动能衰减，适合降低追高仓位。</div>
+            </div>
+            <div class="signal-item">
+              <span class="tag green">底背离</span>
+              <div>若价格回踩 MA60 或前低，但 RSI / MACD 抬升，可作为左侧观察信号，仍需基本面指标确认。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel block">
+          <div class="section-title">
+            <h2>风险与触发条件</h2>
+            <span class="asof">与逻辑一一对应</span>
+          </div>
+          <table>
+            <tbody>
+              <tr><td><span class="tag red">风险</span></td><td>AI Capex 预期下修，HBM 客户延迟认证或砍单。</td></tr>
+              <tr><td><span class="tag red">风险</span></td><td>DRAM 合约价转弱，库存天数重新上升。</td></tr>
+              <tr><td><span class="tag amber">触发</span></td><td>连续 2 周 EPS 上修扩散低于 35%，需复盘估值假设。</td></tr>
+              <tr><td><span class="tag green">确认</span></td><td>HBM 订单可见度、毛利率、ASP 同时改善，维持中期逻辑。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">
+      数据说明：本页面为 demo 样机，不构成投资建议。投资逻辑参考用户提供的《久谦周报20260706(3)》中 AI 算力、半导体、国产算力与 HBM 产业链相关段落；行情快照参考 2026-07-08 延迟行情源；买方预测、技术指标和部分阈值为演示结构所用的示例数据，正式版本应接入行情、财报、卖方/买方预测与内部调研数据库。
+    </p>
+  </main>
+</body>
+</html>
