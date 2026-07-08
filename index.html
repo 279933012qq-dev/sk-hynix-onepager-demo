@@ -365,6 +365,7 @@
       border: 1px solid var(--line);
       border-radius: 7px;
       padding: 12px;
+      background: linear-gradient(180deg, #fff, #fbfcfe);
     }
 
     .case h3 {
@@ -383,6 +384,50 @@
       color: var(--muted);
       font-size: 11px;
       line-height: 1.4;
+    }
+
+    .case-assumption {
+      min-height: 54px;
+      margin-top: 10px;
+      color: #425166;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .case-lines {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #edf1f5;
+    }
+
+    .case-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .case-line b {
+      color: var(--ink);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .scenario-table {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .scenario-table td:first-child,
+    .scenario-table th:first-child {
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .chart {
@@ -643,21 +688,69 @@
               <h3>Bear</h3>
               <div class="big">₩95T</div>
               <span class="tag red">26E Revenue</span>
-              <p>HBM 价格回落，客户认证延后，DRAM 涨价斜率放缓。26E EPS: ₩154k，对应 13.7x。</p>
+              <div class="case-assumption">HBM 客户认证延后，DRAM 合约价涨幅放缓，NAND 复苏弱于预期，利润率恢复速度低于市场预期。</div>
+              <div class="case-lines">
+                <div class="case-line"><span>DRAM ASP YoY</span><b>+18%</b></div>
+                <div class="case-line"><span>HBM 收入占比</span><b>28%</b></div>
+                <div class="case-line"><span>综合毛利率</span><b>43%</b></div>
+                <div class="case-line"><span>经营利润率</span><b>27%</b></div>
+                <div class="case-line"><span>净利润</span><b>₩22.4T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩154k / 13.7x</b></div>
+                <div class="case-line"><span>隐含股价</span><b>₩2.10m</b></div>
+              </div>
             </article>
             <article class="case">
               <h3>Base</h3>
               <div class="big">₩112T</div>
               <span class="tag green">26E Revenue</span>
-              <p>HBM 出货顺利，DRAM 价格继续上行。26E EPS: ₩198k，对应 10.7x。</p>
+              <div class="case-assumption">HBM 出货按计划兑现，DRAM 合约价继续上行，产品结构改善带动毛利率扩张。</div>
+              <div class="case-lines">
+                <div class="case-line"><span>DRAM ASP YoY</span><b>+28%</b></div>
+                <div class="case-line"><span>HBM 收入占比</span><b>34%</b></div>
+                <div class="case-line"><span>综合毛利率</span><b>48%</b></div>
+                <div class="case-line"><span>经营利润率</span><b>32%</b></div>
+                <div class="case-line"><span>净利润</span><b>₩28.8T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩198k / 10.7x</b></div>
+                <div class="case-line"><span>隐含股价</span><b>₩2.60m</b></div>
+              </div>
             </article>
             <article class="case">
               <h3>Bull</h3>
               <div class="big">₩130T</div>
               <span class="tag blue">26E Revenue</span>
-              <p>HBM4 加速放量，AI 客户扩单，利润率继续扩张。26E EPS: ₩242k，对应 8.7x。</p>
+              <div class="case-assumption">HBM4 加速放量，AI 客户扩单，供给约束维持价格韧性，利润率超预期扩张。</div>
+              <div class="case-lines">
+                <div class="case-line"><span>DRAM ASP YoY</span><b>+38%</b></div>
+                <div class="case-line"><span>HBM 收入占比</span><b>41%</b></div>
+                <div class="case-line"><span>综合毛利率</span><b>53%</b></div>
+                <div class="case-line"><span>经营利润率</span><b>37%</b></div>
+                <div class="case-line"><span>净利润</span><b>₩35.2T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩242k / 8.7x</b></div>
+                <div class="case-line"><span>隐含股价</span><b>₩3.15m</b></div>
+              </div>
             </article>
           </div>
+          <table class="scenario-table">
+            <thead>
+              <tr>
+                <th>模型项目</th>
+                <th class="num-cell">Bear</th>
+                <th class="num-cell">Base</th>
+                <th class="num-cell">Bull</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>26E 收入</td><td class="num-cell">₩95T</td><td class="num-cell">₩112T</td><td class="num-cell">₩130T</td></tr>
+              <tr><td>DRAM ASP YoY</td><td class="num-cell">+18%</td><td class="num-cell">+28%</td><td class="num-cell">+38%</td></tr>
+              <tr><td>HBM 收入占比</td><td class="num-cell">28%</td><td class="num-cell">34%</td><td class="num-cell">41%</td></tr>
+              <tr><td>综合毛利率</td><td class="num-cell">43%</td><td class="num-cell">48%</td><td class="num-cell">53%</td></tr>
+              <tr><td>经营利润</td><td class="num-cell">₩25.7T</td><td class="num-cell">₩35.8T</td><td class="num-cell">₩48.1T</td></tr>
+              <tr><td>净利润</td><td class="num-cell">₩22.4T</td><td class="num-cell">₩28.8T</td><td class="num-cell">₩35.2T</td></tr>
+              <tr><td>26E EPS</td><td class="num-cell">₩154k</td><td class="num-cell">₩198k</td><td class="num-cell">₩242k</td></tr>
+              <tr><td>目标 PE</td><td class="num-cell">13.7x</td><td class="num-cell">13.1x</td><td class="num-cell">13.0x</td></tr>
+              <tr><td>隐含股价</td><td class="num-cell">₩2.10m</td><td class="num-cell">₩2.60m</td><td class="num-cell">₩3.15m</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="panel block">
