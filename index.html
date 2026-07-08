@@ -502,18 +502,72 @@
 
     .signal {
       display: grid;
-      gap: 8px;
+      gap: 9px;
     }
 
     .signal-item {
       display: grid;
-      grid-template-columns: 72px 1fr;
+      grid-template-columns: 76px 1.25fr 0.95fr 0.95fr;
       gap: 10px;
+      align-items: start;
       border: 1px solid var(--line);
       border-radius: 7px;
       padding: 10px;
       font-size: 12px;
       line-height: 1.45;
+    }
+
+    .signal-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .status-note {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .status-pill.wait {
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #dbe3ec;
+    }
+
+    .status-pill.watch {
+      background: #fff7e8;
+      color: #b7791f;
+      border: 1px solid #f2d8a7;
+    }
+
+    .status-pill.ok {
+      background: #e8f7ef;
+      color: #129560;
+      border: 1px solid #c7ead8;
+    }
+
+    .risk-table td {
+      vertical-align: top;
+    }
+
+    .risk-table td:nth-child(2) {
+      min-width: 230px;
     }
 
     .footer {
@@ -534,6 +588,7 @@
       .metric-row { grid-template-columns: 1fr; }
       .value { text-align: left; }
       .tech-grid { grid-template-columns: 1fr; }
+      .signal-item { grid-template-columns: 1fr; }
       table { font-size: 11px; }
       th, td { padding: 7px 4px; }
     }
@@ -834,32 +889,66 @@
 
         <div class="panel block">
           <div class="section-title">
-            <h2>顶背离 / 底背离</h2>
-            <span class="asof">交易信号</span>
+            <h2>技术形态监控</h2>
+            <span class="asof">规则，不是结论</span>
           </div>
+          <p class="status-note">当前 demo 未接入逐日 RSI / MACD 自动计算，以下为需要监控的交易信号规则；只有满足条件后，状态才应从“待确认”切换为“已触发”。</p>
           <div class="signal">
             <div class="signal-item">
               <span class="tag red">顶背离</span>
-              <div>股价接近 52 周高位后回落，若 RSI / MACD 未同步创新高，提示上涨动能衰减，适合降低追高仓位。</div>
+              <div><strong>规则含义</strong>股价接近前高或 52 周高位，但 RSI / MACD 未同步创新高，说明上涨动能可能衰减。</div>
+              <div><strong>当前状态</strong><span class="status-pill wait">待确认</span></div>
+              <div><strong>动作</strong>若确认发生，降低追高仓位，复查估值和 EPS 上修是否还能支撑股价。</div>
             </div>
             <div class="signal-item">
               <span class="tag green">底背离</span>
-              <div>若价格回踩 MA60 或前低，但 RSI / MACD 抬升，可作为左侧观察信号，仍需基本面指标确认。</div>
+              <div><strong>规则含义</strong>价格回踩 MA60 或前低，但 RSI / MACD 抬升，说明下跌动能可能减弱。</div>
+              <div><strong>当前状态</strong><span class="status-pill wait">待确认</span></div>
+              <div><strong>动作</strong>只作为左侧观察信号，需叠加 HBM 订单、ASP、毛利率等基本面改善。</div>
             </div>
           </div>
         </div>
 
         <div class="panel block">
           <div class="section-title">
-            <h2>风险与触发条件</h2>
-            <span class="asof">与逻辑一一对应</span>
+            <h2>风险规则与当前状态</h2>
+            <span class="asof">与投资逻辑一一对应</span>
           </div>
-          <table>
+          <p class="status-note">下面的“风险 / 触发 / 确认”是监控分类，不代表已经发生；当前状态按 demo 数据口径标注，正式版本应由实时数据自动更新。</p>
+          <table class="risk-table">
+            <thead>
+              <tr>
+                <th>分类</th>
+                <th>监控规则</th>
+                <th>当前状态</th>
+                <th>需要动作</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><span class="tag red">风险</span></td><td>AI Capex 预期下修，HBM 客户延迟认证或砍单。</td></tr>
-              <tr><td><span class="tag red">风险</span></td><td>DRAM 合约价转弱，库存天数重新上升。</td></tr>
-              <tr><td><span class="tag amber">触发</span></td><td>连续 2 周 EPS 上修扩散低于 35%，需复盘估值假设。</td></tr>
-              <tr><td><span class="tag green">确认</span></td><td>HBM 订单可见度、毛利率、ASP 同时改善，维持中期逻辑。</td></tr>
+              <tr>
+                <td><span class="tag red">风险</span></td>
+                <td>AI Capex 预期下修，HBM 客户延迟认证或砍单。</td>
+                <td><span class="status-pill wait">未触发 / 待接入</span></td>
+                <td>若发生，复盘 HBM 出货、收入和估值溢价假设。</td>
+              </tr>
+              <tr>
+                <td><span class="tag red">风险</span></td>
+                <td>DRAM 合约价转弱，库存天数重新上升。</td>
+                <td><span class="status-pill wait">未触发 / 待接入</span></td>
+                <td>若发生，下调 DRAM ASP、毛利率和经营利润率假设。</td>
+              </tr>
+              <tr>
+                <td><span class="tag amber">触发</span></td>
+                <td>连续 2 周 EPS 上修扩散低于 35%。</td>
+                <td><span class="status-pill watch">观察中</span></td>
+                <td>若触发，复盘 Base case 目标价和 PE 倍数假设。</td>
+              </tr>
+              <tr>
+                <td><span class="tag green">确认</span></td>
+                <td>HBM 订单可见度、毛利率、ASP 同时改善。</td>
+                <td><span class="status-pill wait">待确认</span></td>
+                <td>若确认，维持或上修 Base / Bull case。</td>
+              </tr>
             </tbody>
           </table>
         </div>
