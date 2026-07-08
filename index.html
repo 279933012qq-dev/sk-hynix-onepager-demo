@@ -379,6 +379,30 @@
       margin-bottom: 4px;
     }
 
+    .price-target {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #d9e7ff;
+      border-radius: 7px;
+      background: #f1f6ff;
+    }
+
+    .price-target span {
+      display: block;
+      color: #4f6278;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .price-target b {
+      display: block;
+      margin-top: 3px;
+      color: var(--blue);
+      font-size: 24px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
     .case p {
       margin: 8px 0 0;
       color: var(--muted);
@@ -430,12 +454,25 @@
       white-space: nowrap;
     }
 
-    .chart {
-      height: 168px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 10px;
-      background: #fbfcfe;
+    .scenario-table tr.price-row td {
+      background: #f1f6ff;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .target-price {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 72px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #eaf2ff;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
     }
 
     .tech-grid {
@@ -688,6 +725,7 @@
               <h3>Bear</h3>
               <div class="big">₩95T</div>
               <span class="tag red">26E Revenue</span>
+              <div class="price-target"><span>隐含股价</span><b>₩2.10m</b></div>
               <div class="case-assumption">HBM 客户认证延后，DRAM 合约价涨幅放缓，NAND 复苏弱于预期，利润率恢复速度低于市场预期。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+18%</b></div>
@@ -696,13 +734,13 @@
                 <div class="case-line"><span>经营利润率</span><b>27%</b></div>
                 <div class="case-line"><span>净利润</span><b>₩22.4T</b></div>
                 <div class="case-line"><span>26E EPS / PE</span><b>₩154k / 13.7x</b></div>
-                <div class="case-line"><span>隐含股价</span><b>₩2.10m</b></div>
               </div>
             </article>
             <article class="case">
               <h3>Base</h3>
               <div class="big">₩112T</div>
               <span class="tag green">26E Revenue</span>
+              <div class="price-target"><span>隐含股价</span><b>₩2.60m</b></div>
               <div class="case-assumption">HBM 出货按计划兑现，DRAM 合约价继续上行，产品结构改善带动毛利率扩张。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+28%</b></div>
@@ -711,13 +749,13 @@
                 <div class="case-line"><span>经营利润率</span><b>32%</b></div>
                 <div class="case-line"><span>净利润</span><b>₩28.8T</b></div>
                 <div class="case-line"><span>26E EPS / PE</span><b>₩198k / 10.7x</b></div>
-                <div class="case-line"><span>隐含股价</span><b>₩2.60m</b></div>
               </div>
             </article>
             <article class="case">
               <h3>Bull</h3>
               <div class="big">₩130T</div>
               <span class="tag blue">26E Revenue</span>
+              <div class="price-target"><span>隐含股价</span><b>₩3.15m</b></div>
               <div class="case-assumption">HBM4 加速放量，AI 客户扩单，供给约束维持价格韧性，利润率超预期扩张。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+38%</b></div>
@@ -726,7 +764,6 @@
                 <div class="case-line"><span>经营利润率</span><b>37%</b></div>
                 <div class="case-line"><span>净利润</span><b>₩35.2T</b></div>
                 <div class="case-line"><span>26E EPS / PE</span><b>₩242k / 8.7x</b></div>
-                <div class="case-line"><span>隐含股价</span><b>₩3.15m</b></div>
               </div>
             </article>
           </div>
@@ -748,7 +785,7 @@
               <tr><td>净利润</td><td class="num-cell">₩22.4T</td><td class="num-cell">₩28.8T</td><td class="num-cell">₩35.2T</td></tr>
               <tr><td>26E EPS</td><td class="num-cell">₩154k</td><td class="num-cell">₩198k</td><td class="num-cell">₩242k</td></tr>
               <tr><td>目标 PE</td><td class="num-cell">13.7x</td><td class="num-cell">13.1x</td><td class="num-cell">13.0x</td></tr>
-              <tr><td>隐含股价</td><td class="num-cell">₩2.10m</td><td class="num-cell">₩2.60m</td><td class="num-cell">₩3.15m</td></tr>
+              <tr class="price-row"><td>隐含股价</td><td class="num-cell">₩2.10m</td><td class="num-cell">₩2.60m</td><td class="num-cell">₩3.15m</td></tr>
             </tbody>
           </table>
         </div>
@@ -769,49 +806,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>Buy-side A</td><td class="num-cell">₩185k</td><td class="num-cell">11.4x</td><td class="num-cell">₩2.45m</td><td>HBM 订单确定性高</td></tr>
-              <tr><td>Buy-side B</td><td class="num-cell">₩198k</td><td class="num-cell">10.7x</td><td class="num-cell">₩2.60m</td><td>维持 Base</td></tr>
-              <tr><td>Buy-side C</td><td class="num-cell">₩211k</td><td class="num-cell">10.0x</td><td class="num-cell">₩2.85m</td><td>价格上修</td></tr>
-              <tr><td>Buy-side D</td><td class="num-cell">₩226k</td><td class="num-cell">9.4x</td><td class="num-cell">₩3.10m</td><td>看好 HBM4</td></tr>
-              <tr><td>Buy-side E</td><td class="num-cell">₩174k</td><td class="num-cell">12.2x</td><td class="num-cell">₩2.25m</td><td>担心高位波动</td></tr>
+              <tr><td>Buy-side A</td><td class="num-cell">₩185k</td><td class="num-cell">11.4x</td><td class="num-cell"><span class="target-price">₩2.45m</span></td><td>HBM 订单确定性高</td></tr>
+              <tr><td>Buy-side B</td><td class="num-cell">₩198k</td><td class="num-cell">10.7x</td><td class="num-cell"><span class="target-price">₩2.60m</span></td><td>维持 Base</td></tr>
+              <tr><td>Buy-side C</td><td class="num-cell">₩211k</td><td class="num-cell">10.0x</td><td class="num-cell"><span class="target-price">₩2.85m</span></td><td>价格上修</td></tr>
+              <tr><td>Buy-side D</td><td class="num-cell">₩226k</td><td class="num-cell">9.4x</td><td class="num-cell"><span class="target-price">₩3.10m</span></td><td>看好 HBM4</td></tr>
+              <tr><td>Buy-side E</td><td class="num-cell">₩174k</td><td class="num-cell">12.2x</td><td class="num-cell"><span class="target-price">₩2.25m</span></td><td>担心高位波动</td></tr>
             </tbody>
           </table>
-        </div>
-
-        <div class="panel block">
-          <div class="section-title">
-            <h2>收入与 EPS 情景图</h2>
-            <span class="asof">2026E</span>
-          </div>
-          <div class="chart">
-            <svg viewBox="0 0 520 150" width="100%" height="100%" role="img" aria-label="Bear Base Bull 情景图">
-              <line x1="36" y1="124" x2="500" y2="124" stroke="#ccd5df" />
-              <line x1="36" y1="20" x2="36" y2="124" stroke="#ccd5df" />
-              <g font-size="11" fill="#657386">
-                <text x="26" y="128" text-anchor="end">0</text>
-                <text x="26" y="82" text-anchor="end">65</text>
-                <text x="26" y="28" text-anchor="end">130</text>
-              </g>
-              <g>
-                <rect x="86" y="48" width="44" height="76" rx="4" fill="#cf3e3e" />
-                <rect x="228" y="34" width="44" height="90" rx="4" fill="#15945b" />
-                <rect x="370" y="20" width="44" height="104" rx="4" fill="#2266d1" />
-                <polyline points="108,66 250,50 392,36" fill="none" stroke="#7059c8" stroke-width="3" />
-                <circle cx="108" cy="66" r="5" fill="#7059c8" />
-                <circle cx="250" cy="50" r="5" fill="#7059c8" />
-                <circle cx="392" cy="36" r="5" fill="#7059c8" />
-              </g>
-              <g font-size="12" fill="#17202a" font-weight="700">
-                <text x="108" y="142" text-anchor="middle">Bear</text>
-                <text x="250" y="142" text-anchor="middle">Base</text>
-                <text x="392" y="142" text-anchor="middle">Bull</text>
-              </g>
-              <g font-size="11" fill="#657386">
-                <text x="442" y="34">紫线: EPS</text>
-                <text x="442" y="50">柱: Revenue</text>
-              </g>
-            </svg>
-          </div>
         </div>
       </div>
 
