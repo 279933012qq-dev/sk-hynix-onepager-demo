@@ -37,7 +37,7 @@
 
     .topbar {
       display: grid;
-      grid-template-columns: .72fr 1.28fr;
+      grid-template-columns: .58fr 1.42fr;
       gap: 10px;
       align-items: stretch;
       margin-bottom: 10px;
@@ -179,6 +179,63 @@
       font-weight: 700;
     }
 
+    .decision-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .decision-block {
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 7px;
+      background: #fbfdff;
+    }
+
+    .decision-block h3 {
+      margin: 0 0 6px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .target-grid,
+    .risk-grid {
+      display: grid;
+      gap: 5px;
+    }
+
+    .target-line,
+    .risk-line {
+      display: grid;
+      grid-template-columns: 46px 1fr 54px;
+      gap: 6px;
+      align-items: center;
+      font-size: 9px;
+      line-height: 1.25;
+    }
+
+    .target-line b,
+    .risk-line b {
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .target-line strong {
+      color: var(--blue);
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .risk-line strong {
+      font-size: 10px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
     .mini-metrics,
     .snapshot-grid {
       display: grid;
@@ -224,7 +281,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
-      margin: 8px 0;
+      margin: 6px 0;
     }
 
     .forecast-item {
@@ -345,7 +402,7 @@
       border-radius: 7px;
       padding: 8px;
       background: linear-gradient(180deg, #fff, #fbfcfe);
-      min-height: 192px;
+      min-height: 176px;
       display: flex;
       flex-direction: column;
       gap: 7px;
@@ -372,12 +429,43 @@
     }
 
     .sparkline {
-      height: 76px;
+      height: 68px;
       border: 1px solid #e6edf4;
       border-radius: 6px;
       background: #fbfdff;
       padding: 6px;
     }
+
+    .logic-framework {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .framework-card {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 7px;
+      background: linear-gradient(180deg, #fff, #fbfcfe);
+      min-height: 118px;
+    }
+
+    .framework-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 10px;
+      line-height: 1.25;
+    }
+
+    .framework-card ul {
+      margin: 0;
+      padding-left: 13px;
+      color: #425166;
+      font-size: 9px;
+      line-height: 1.35;
+    }
+
+    .framework-card li + li { margin-top: 3px; }
 
     .history-note {
       display: grid;
@@ -628,6 +716,8 @@
       .topbar { grid-template-columns: 1fr; }
       .main { grid-template-columns: 1.2fr .8fr; }
       .indicator-grid { grid-template-columns: repeat(2, 1fr); }
+      .logic-framework { grid-template-columns: repeat(3, 1fr); }
+      .decision-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
@@ -635,6 +725,7 @@
       h1 { font-size: 24px; }
       .topbar, .main { grid-template-columns: 1fr; }
       .thesis-grid, .case-grid, .indicator-grid { grid-template-columns: 1fr; }
+      .logic-framework { grid-template-columns: 1fr; }
       .snapshot-grid, .forecast-strip { grid-template-columns: repeat(2, 1fr); }
       .metric-row { grid-template-columns: 1fr; }
       .value { text-align: left; }
@@ -663,48 +754,108 @@
 
       <div class="panel quote">
         <div class="section-title">
-          <h2>行情 / 估值 / 技术快照</h2>
-          <span class="asof">延迟源 | demo 口径</span>
+          <h2>行情快照 / 决策快照</h2>
+          <span class="asof">延迟源 | demo 口径 | 桌面优先</span>
         </div>
-        <div class="price">
-          <span class="num">₩2,116,000</span>
-          <span class="chg">-3.86%</span>
-        </div>
-        <div class="forecast-strip">
-          <div class="forecast-item"><span>26E 利润 / PE</span><b>₩141T / 10.7x</b></div>
-          <div class="forecast-item"><span>27E 利润 / PE</span><b>₩165T / 9.1x</b></div>
-          <div class="forecast-item"><span>28E 利润 / PE</span><b>₩183T / 8.2x</b></div>
-        </div>
-        <div class="snapshot-grid">
-          <div class="snapshot"><span>P/E TTM</span><b>20.0x</b><small>高于历史中枢</small></div>
-          <div class="snapshot"><span>市值</span><b>₩1,502T / $1.03T</b><small>约为美光 0.95x</small></div>
-          <div class="snapshot"><span>52 周区间</span><b>₩245k - ₩2.987m</b><small>仍在高位区间</small></div>
-          <div class="snapshot"><span>成交量</span><b>4.69m</b><small>流动性充足</small></div>
-          <div class="snapshot warn"><span>60 日波动率</span><b>67%</b><small>高波动，仓位需折扣</small></div>
-          <div class="snapshot warn"><span>均线位置</span><b>&lt; MA20，&gt; MA60</b><small>短线转弱，中期未破</small></div>
-          <div class="snapshot good"><span>夏普比率</span><b>2.1</b><small>趋势收益仍占优</small></div>
-          <div class="snapshot bad"><span>回撤</span><b>近 3 月 -30%</b><small>追高风险升高</small></div>
+        <div class="decision-grid">
+          <div class="decision-block">
+            <h3>当前行情</h3>
+            <div class="price">
+              <span class="num">₩211.6k</span>
+              <span class="chg">-3.86%</span>
+            </div>
+            <div class="forecast-strip">
+              <div class="forecast-item"><span>26E 利润 / PE</span><b>₩14.1T / 10.7x</b></div>
+              <div class="forecast-item"><span>27E 利润 / PE</span><b>₩16.5T / 9.1x</b></div>
+              <div class="forecast-item"><span>28E 利润 / PE</span><b>₩18.3T / 8.2x</b></div>
+            </div>
+            <div class="snapshot-grid">
+              <div class="snapshot"><span>市值</span><b>₩150T / $103B</b><small>约为美光 0.95x</small></div>
+              <div class="snapshot"><span>P/E TTM</span><b>20.0x</b><small>高于历史中枢</small></div>
+              <div class="snapshot"><span>52 周</span><b>₩245k-2.987m</b><small>高位区间</small></div>
+              <div class="snapshot"><span>成交量</span><b>4.69m</b><small>流动性足</small></div>
+            </div>
+          </div>
+          <div class="decision-block">
+            <h3>目标市值与上行空间</h3>
+            <div class="target-grid">
+              <div class="target-line"><b>2026</b><span>目标市值 ₩150T，隐含股价 ₩211k</span><strong>约 0%</strong></div>
+              <div class="target-line"><b>2027</b><span>目标市值 ₩200T，隐含股价 ₩282k</span><strong>+33%</strong></div>
+              <div class="target-line"><b>2028</b><span>目标市值 ₩300T，隐含股价 ₩423k</span><strong>+100%</strong></div>
+            </div>
+            <div class="snapshot-grid" style="margin-top:6px">
+              <div class="snapshot warn"><span>60 日波动率</span><b>67%</b><small>高波动，仓位折扣</small></div>
+              <div class="snapshot warn"><span>均线位置</span><b>&lt;MA20，&gt;MA60</b><small>短弱中未破</small></div>
+              <div class="snapshot good"><span>夏普</span><b>2.1</b><small>趋势仍占优</small></div>
+              <div class="snapshot bad"><span>回撤</span><b>3M -30%</b><small>追高风险</small></div>
+            </div>
+          </div>
+          <div class="decision-block">
+            <h3>杠杆资金风险测算</h3>
+            <div class="risk-grid">
+              <div class="risk-line"><b>融资余额</b><span>近 20 日 +18%，高于价格涨幅</span><strong class="tag amber">观察</strong></div>
+              <div class="risk-line"><b>拥挤度</b><span>前 5 券商成交占比 41%</span><strong class="tag amber">偏高</strong></div>
+              <div class="risk-line"><b>止损线</b><span>若跌破 MA60，杠杆盘可能被动减仓</span><strong class="tag red">需测算</strong></div>
+              <div class="risk-line"><b>专题</b><span>后续固定跟踪融资、期权、外资净买入</span><strong class="tag blue">待接入</strong></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="panel thesis">
       <div class="section-title">
-        <h2>投资逻辑</h2>
-        <span class="asof">样机版 | 2026-07-09</span>
+        <h2>投资逻辑框架</h2>
+        <span class="asof">样机版 | 2026-07-09 | 逻辑与数据一一对应</span>
       </div>
-      <div class="thesis-grid">
-        <article class="logic-card">
-          <strong>1. AI 服务器推动 HBM 量价景气</strong>
-          <p>周报强调 CSP 资本开支与 AI 算力需求仍是半导体主线，海力士的核心验证点应落在 HBM 订单、ASP 和产能转换。</p>
+      <div class="logic-framework">
+        <article class="framework-card">
+          <strong>1. 存储需求预测</strong>
+          <ul>
+            <li>HBM: AI GPU 拉动，按客户、代际、容量拆分。</li>
+            <li>DRAM: 服务器优先，PC/手机作为弹性项。</li>
+            <li>NAND: 复苏慢于 DRAM，作为利润修复补充。</li>
+          </ul>
         </article>
-        <article class="logic-card">
-          <strong>2. 存储上行周期提升盈利弹性</strong>
-          <p>若 DRAM 价格、库存周转和合约价继续改善，利润率对收入增长具备放大效应。</p>
+        <article class="framework-card">
+          <strong>2. 存储供给预测</strong>
+          <ul>
+            <li>2025-2030 按三星/海力士/美光 wafer 与 byte 表。</li>
+            <li>跟踪 HBM 转产挤出普通 DRAM 的供给约束。</li>
+            <li>Capex、良率、先进封装为关键约束。</li>
+          </ul>
         </article>
-        <article class="logic-card">
-          <strong>3. 估值与技术面决定交易节奏</strong>
-          <p>股价年内涨幅较大，需同时跟踪预期上修、估值消化、均线位置和背离信号。</p>
+        <article class="framework-card">
+          <strong>3. 内存墙构成</strong>
+          <ul>
+            <li>列过去十年算力速度与存储带宽速度之比。</li>
+            <li>判断未来算力继续拉开带宽，HBM 价值量上移。</li>
+            <li>用 GPU 代际、带宽/容量需求做验证。</li>
+          </ul>
+        </article>
+        <article class="framework-card">
+          <strong>4. 竞争格局</strong>
+          <ul>
+            <li>HBM 市占率、认证进度、客户份额逐季跟踪。</li>
+            <li>判断海力士领先窗口期长度及被追赶风险。</li>
+            <li>三星、美光 HBM3E/HBM4 放量是关键变量。</li>
+          </ul>
+        </article>
+        <article class="framework-card">
+          <strong>5. LTA 进展与占比</strong>
+          <ul>
+            <li>列订单事件、锁量、价格机制、交付时间节点。</li>
+            <li>跟踪 LTA 占 HBM/DRAM 收入比例。</li>
+            <li>判断利润可见度和估值溢价持续性。</li>
+          </ul>
+        </article>
+        <article class="framework-card">
+          <strong>6. 盈利计算公式</strong>
+          <ul>
+            <li>收入 = bit 出货 x 每 Gb 价格 x mix。</li>
+            <li>毛利 = 收入 x 毛利率；净利扣除费用/税率。</li>
+            <li>目标市值 = 净利 x PE；再换算目标股价。</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -717,16 +868,17 @@
       <div class="indicator-grid">
         <article class="indicator-card">
           <div class="indicator-head">
-            <h3>DRAM 合约价 QoQ</h3>
+            <h3>DRAM 每 Gb 价格与远期预期</h3>
             <span class="tag green">月度</span>
           </div>
-          <div class="indicator-meta">验证存储上行周期是否延续。若合约价连续上行，说明服务器与 AI 需求能抵消消费端波动。</div>
+          <div class="indicator-meta">验证存储上行周期是否延续。除合约价 QoQ，还要固定跟踪 $/Gb 现货、合约与 2Q forward 价格。</div>
           <div class="sparkline">
-            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="DRAM 合约价 QoQ 历史走势">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="DRAM 每 Gb 价格历史与预期走势">
               <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
               <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
               <line x1="24" y1="50" x2="268" y2="50" stroke="#edf1f5" stroke-dasharray="3 3" />
               <polyline points="28,66 62,72 96,60 130,52 164,45 198,37 232,30 264,24" fill="none" stroke="#15945b" stroke-width="3" />
+              <polyline points="198,37 232,32 264,27" fill="none" stroke="#c57d13" stroke-width="2" stroke-dasharray="4 3" />
               <g fill="#15945b">
                 <circle cx="28" cy="66" r="3" /><circle cx="62" cy="72" r="3" /><circle cx="96" cy="60" r="3" /><circle cx="130" cy="52" r="3" />
                 <circle cx="164" cy="45" r="3" /><circle cx="198" cy="37" r="3" /><circle cx="232" cy="30" r="3" /><circle cx="264" cy="24" r="3" />
@@ -738,20 +890,20 @@
             </svg>
           </div>
           <div class="history-note">
-            <span><b>最新</b>+8%</span>
-            <span><b>趋势</b>连续改善</span>
-            <span><b>来源</b>报价/调研</span>
+            <span><b>现货</b>$0.42/Gb</span>
+            <span><b>合约</b>$0.39/Gb</span>
+            <span><b>2Q 预期</b>$0.45/Gb</span>
           </div>
         </article>
 
         <article class="indicator-card">
           <div class="indicator-head">
-            <h3>HBM 出货占比</h3>
+            <h3>HBM 占 DRAM 片数比例</h3>
             <span class="tag blue">季度</span>
           </div>
-          <div class="indicator-meta">验证 AI 客户拉货强度与产品结构升级，直接影响 ASP、毛利率和海力士相对竞争力。</div>
+          <div class="indicator-meta">验证 AI 客户拉货强度与 HBM 转产挤出效应。片数比例比收入占比更适合判断普通 DRAM 供给约束。</div>
           <div class="sparkline">
-            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="HBM 出货占比历史走势">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="HBM 占 DRAM 片数比例历史走势">
               <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
               <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
               <rect x="42" y="64" width="24" height="18" rx="3" fill="#bcd5ff" />
@@ -767,24 +919,27 @@
             </svg>
           </div>
           <div class="history-note">
-            <span><b>最新</b>高位</span>
-            <span><b>趋势</b>上行</span>
-            <span><b>来源</b>财报/法说会</span>
+            <span><b>25E</b>12%</span>
+            <span><b>26E</b>18%</span>
+            <span><b>27E</b>24%</span>
           </div>
         </article>
 
         <article class="indicator-card">
           <div class="indicator-head">
-            <h3>经营利润率</h3>
+            <h3>HBM LTA 事件与占比</h3>
             <span class="tag green">季度</span>
           </div>
-          <div class="indicator-meta">验证涨价和产品结构改善是否真正进入利润表。若收入增长但利润率不扩张，需要复盘成本和良率。</div>
+          <div class="indicator-meta">把订单锁量、认证、价格机制、交付节点做成事件轴；占比提高代表利润可见度上升。</div>
           <div class="sparkline">
-            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="经营利润率历史走势">
+            <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="HBM LTA 占比历史走势">
               <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
               <line x1="24" y1="18" x2="24" y2="82" stroke="#d8e0e8" />
               <polyline points="28,72 62,67 96,56 130,46 164,34 198,28 232,25 264,23" fill="none" stroke="#00a6b2" stroke-width="3" />
               <path d="M28 72 L62 67 L96 56 L130 46 L164 34 L198 28 L232 25 L264 23 L264 82 L28 82 Z" fill="rgba(0,166,178,.12)" />
+              <g fill="#c57d13">
+                <circle cx="96" cy="56" r="4" /><circle cx="164" cy="34" r="4" /><circle cx="232" cy="25" r="4" />
+              </g>
               <g font-size="9" fill="#657386">
                 <text x="28" y="95" text-anchor="middle">24Q3</text><text x="130" y="95" text-anchor="middle">25Q2</text><text x="264" y="95" text-anchor="middle">26Q1</text>
                 <text x="16" y="22" text-anchor="end">70%</text><text x="16" y="84" text-anchor="end">0</text>
@@ -792,18 +947,18 @@
             </svg>
           </div>
           <div class="history-note">
-            <span><b>最新</b>扩张</span>
-            <span><b>趋势</b>改善</span>
-            <span><b>来源</b>财报</span>
+            <span><b>25Q4</b>客户扩单</span>
+            <span><b>26Q2</b>HBM4 认证</span>
+            <span><b>占比</b>65%+</span>
           </div>
         </article>
 
         <article class="indicator-card">
           <div class="indicator-head">
-            <h3>EPS 上修扩散度</h3>
+            <h3>EPS 上修扩散度与目标市值</h3>
             <span class="tag amber">周度</span>
           </div>
-          <div class="indicator-meta">验证市场预期是否仍在上修。股价高位时，该指标比单纯 PE 更能判断是否还有预期差。</div>
+          <div class="indicator-meta">验证市场预期是否仍在上修，并与 2026/2027/2028 目标市值匹配，直接服务风险回报率。</div>
           <div class="sparkline">
             <svg viewBox="0 0 280 100" width="100%" height="100%" role="img" aria-label="EPS 上修扩散度历史走势">
               <line x1="24" y1="82" x2="268" y2="82" stroke="#d8e0e8" />
@@ -821,8 +976,8 @@
           </div>
           <div class="history-note">
             <span><b>最新</b>64%</span>
-            <span><b>趋势</b>高位回落</span>
-            <span><b>来源</b>预测库</span>
+            <span><b>27 市值</b>₩200T</span>
+            <span><b>28 市值</b>₩300T</span>
           </div>
         </article>
       </div>
@@ -840,45 +995,45 @@
               <h3>Bear</h3>
               <div class="big">₩95T</div>
               <span class="tag red">26E Revenue</span>
-              <div class="price-target"><span>隐含股价</span><b>₩2.10m</b></div>
+              <div class="price-target"><span>隐含股价</span><b>₩210k</b></div>
               <div class="case-assumption">HBM 客户认证延后，DRAM 合约价涨幅放缓，NAND 复苏弱于预期，利润率恢复速度低于市场预期。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+18%</b></div>
                 <div class="case-line"><span>HBM 收入占比</span><b>28%</b></div>
                 <div class="case-line"><span>综合毛利率</span><b>43%</b></div>
                 <div class="case-line"><span>经营利润率</span><b>27%</b></div>
-                <div class="case-line"><span>净利润</span><b>₩22.4T</b></div>
-                <div class="case-line"><span>26E EPS / PE</span><b>₩154k / 13.7x</b></div>
+                <div class="case-line"><span>净利润</span><b>₩11.2T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩15.4k / 13.7x</b></div>
               </div>
             </article>
             <article class="case">
               <h3>Base</h3>
               <div class="big">₩112T</div>
               <span class="tag green">26E Revenue</span>
-              <div class="price-target"><span>隐含股价</span><b>₩2.60m</b></div>
+              <div class="price-target"><span>隐含股价</span><b>₩260k</b></div>
               <div class="case-assumption">HBM 出货按计划兑现，DRAM 合约价继续上行，产品结构改善带动毛利率扩张。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+28%</b></div>
                 <div class="case-line"><span>HBM 收入占比</span><b>34%</b></div>
                 <div class="case-line"><span>综合毛利率</span><b>48%</b></div>
                 <div class="case-line"><span>经营利润率</span><b>32%</b></div>
-                <div class="case-line"><span>净利润</span><b>₩28.8T</b></div>
-                <div class="case-line"><span>26E EPS / PE</span><b>₩198k / 10.7x</b></div>
+                <div class="case-line"><span>净利润</span><b>₩14.1T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩19.8k / 10.7x</b></div>
               </div>
             </article>
             <article class="case">
               <h3>Bull</h3>
               <div class="big">₩130T</div>
               <span class="tag blue">26E Revenue</span>
-              <div class="price-target"><span>隐含股价</span><b>₩3.15m</b></div>
+              <div class="price-target"><span>隐含股价</span><b>₩315k</b></div>
               <div class="case-assumption">HBM4 加速放量，AI 客户扩单，供给约束维持价格韧性，利润率超预期扩张。</div>
               <div class="case-lines">
                 <div class="case-line"><span>DRAM ASP YoY</span><b>+38%</b></div>
                 <div class="case-line"><span>HBM 收入占比</span><b>41%</b></div>
                 <div class="case-line"><span>综合毛利率</span><b>53%</b></div>
                 <div class="case-line"><span>经营利润率</span><b>37%</b></div>
-                <div class="case-line"><span>净利润</span><b>₩35.2T</b></div>
-                <div class="case-line"><span>26E EPS / PE</span><b>₩242k / 8.7x</b></div>
+                <div class="case-line"><span>净利润</span><b>₩17.2T</b></div>
+                <div class="case-line"><span>26E EPS / PE</span><b>₩24.2k / 8.7x</b></div>
               </div>
             </article>
           </div>
@@ -897,10 +1052,10 @@
               <tr><td>HBM 收入占比</td><td class="num-cell">28%</td><td class="num-cell">34%</td><td class="num-cell">41%</td></tr>
               <tr><td>综合毛利率</td><td class="num-cell">43%</td><td class="num-cell">48%</td><td class="num-cell">53%</td></tr>
               <tr><td>经营利润</td><td class="num-cell">₩25.7T</td><td class="num-cell">₩35.8T</td><td class="num-cell">₩48.1T</td></tr>
-              <tr><td>净利润</td><td class="num-cell">₩22.4T</td><td class="num-cell">₩28.8T</td><td class="num-cell">₩35.2T</td></tr>
-              <tr><td>26E EPS</td><td class="num-cell">₩154k</td><td class="num-cell">₩198k</td><td class="num-cell">₩242k</td></tr>
+              <tr><td>净利润</td><td class="num-cell">₩11.2T</td><td class="num-cell">₩14.1T</td><td class="num-cell">₩17.2T</td></tr>
+              <tr><td>26E EPS</td><td class="num-cell">₩15.4k</td><td class="num-cell">₩19.8k</td><td class="num-cell">₩24.2k</td></tr>
               <tr><td>目标 PE</td><td class="num-cell">13.7x</td><td class="num-cell">13.1x</td><td class="num-cell">13.0x</td></tr>
-              <tr class="price-row"><td>隐含股价</td><td class="num-cell">₩2.10m</td><td class="num-cell">₩2.60m</td><td class="num-cell">₩3.15m</td></tr>
+              <tr class="price-row"><td>隐含股价</td><td class="num-cell">₩210k</td><td class="num-cell">₩260k</td><td class="num-cell">₩315k</td></tr>
             </tbody>
           </table>
         </div>
@@ -921,11 +1076,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>Buy-side A</td><td class="num-cell">₩185k</td><td class="num-cell">11.4x</td><td class="num-cell"><span class="target-price">₩2.45m</span></td><td>HBM 订单确定性高</td></tr>
-              <tr><td>Buy-side B</td><td class="num-cell">₩198k</td><td class="num-cell">10.7x</td><td class="num-cell"><span class="target-price">₩2.60m</span></td><td>维持 Base</td></tr>
-              <tr><td>Buy-side C</td><td class="num-cell">₩211k</td><td class="num-cell">10.0x</td><td class="num-cell"><span class="target-price">₩2.85m</span></td><td>价格上修</td></tr>
-              <tr><td>Buy-side D</td><td class="num-cell">₩226k</td><td class="num-cell">9.4x</td><td class="num-cell"><span class="target-price">₩3.10m</span></td><td>看好 HBM4</td></tr>
-              <tr><td>Buy-side E</td><td class="num-cell">₩174k</td><td class="num-cell">12.2x</td><td class="num-cell"><span class="target-price">₩2.25m</span></td><td>担心高位波动</td></tr>
+              <tr><td>Buy-side A</td><td class="num-cell">₩18.5k</td><td class="num-cell">11.4x</td><td class="num-cell"><span class="target-price">₩245k</span></td><td>HBM 订单确定性高</td></tr>
+              <tr><td>Buy-side B</td><td class="num-cell">₩19.8k</td><td class="num-cell">10.7x</td><td class="num-cell"><span class="target-price">₩260k</span></td><td>维持 Base</td></tr>
+              <tr><td>Buy-side C</td><td class="num-cell">₩21.1k</td><td class="num-cell">10.0x</td><td class="num-cell"><span class="target-price">₩285k</span></td><td>价格上修</td></tr>
+              <tr><td>Buy-side D</td><td class="num-cell">₩22.6k</td><td class="num-cell">9.4x</td><td class="num-cell"><span class="target-price">₩310k</span></td><td>看好 HBM4</td></tr>
+              <tr><td>Buy-side E</td><td class="num-cell">₩17.4k</td><td class="num-cell">12.2x</td><td class="num-cell"><span class="target-price">₩225k</span></td><td>担心高位波动</td></tr>
             </tbody>
           </table>
         </div>
