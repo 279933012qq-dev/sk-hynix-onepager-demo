@@ -9,12 +9,14 @@
       --bg: #f4f6f8;
       --panel: #fff;
       --ink: #17202a;
-      --muted: #667485;
+      --muted: #657386;
       --line: #dfe6ee;
       --blue: #2266d1;
+      --cyan: #00a6b2;
       --green: #15845b;
       --amber: #b87412;
       --red: #c43d3d;
+      --purple: #6b5bd6;
       --soft-blue: #eef5ff;
       --soft-green: #eaf8f1;
       --soft-amber: #fff5e5;
@@ -45,20 +47,19 @@
 
     .top {
       display: grid;
-      grid-template-columns: 260px 1fr 300px;
+      grid-template-columns: 260px 1fr 330px;
       gap: 8px;
       margin-bottom: 8px;
     }
 
     .main {
       display: grid;
-      grid-template-columns: 1.12fr .88fr;
+      grid-template-columns: 1.18fr .82fr;
       gap: 8px;
       align-items: start;
     }
 
     .stack { display: grid; gap: 8px; }
-
     h1, h2, h3, p { margin: 0; }
     h1 { font-size: 25px; line-height: 1.05; }
     h2 { font-size: 13px; line-height: 1.2; }
@@ -104,11 +105,12 @@
     .green { background: var(--soft-green); color: var(--green); }
     .amber { background: var(--soft-amber); color: var(--amber); }
     .red { background: var(--soft-red); color: var(--red); }
+    .pe-red { color: var(--red); font-weight: 850; }
 
     .section-title {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 8px;
       margin-bottom: 8px;
     }
@@ -116,25 +118,20 @@
     .asof {
       color: var(--muted);
       font-size: 9px;
-      white-space: nowrap;
+      line-height: 1.25;
+      text-align: right;
     }
 
-    .quote-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1.35fr 1fr;
-      gap: 7px;
-    }
-
-    .metric-grid {
+    .quote-grid, .metric-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 6px;
     }
 
     .metric {
-      min-height: 54px;
       border-top: 1px solid var(--line);
       padding-top: 6px;
+      min-height: 50px;
     }
 
     .metric span {
@@ -148,8 +145,8 @@
       display: block;
       margin-top: 2px;
       font-size: 12px;
-      line-height: 1.2;
       font-variant-numeric: tabular-nums;
+      line-height: 1.2;
     }
 
     .metric small {
@@ -164,7 +161,7 @@
       display: flex;
       align-items: baseline;
       gap: 8px;
-      margin: 4px 0 7px;
+      margin-top: 4px;
     }
 
     .price .num {
@@ -179,45 +176,183 @@
       font-weight: 800;
     }
 
-    .pe-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
-      margin-bottom: 7px;
-    }
-
-    .pe-card {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 6px;
-      background: #fbfdff;
-    }
-
-    .pe-card span {
-      display: block;
-      color: var(--muted);
-      font-size: 9px;
-    }
-
-    .pe-card b {
-      display: block;
-      margin-top: 2px;
-      color: var(--blue);
-      font-size: 12px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .pe-card small {
-      display: block;
-      margin-top: 1px;
-      color: var(--muted);
-      font-size: 8.5px;
-    }
-
     .note {
       color: var(--muted);
       font-size: 9px;
       line-height: 1.35;
+    }
+
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .forecast-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      background: linear-gradient(180deg, #fff, #fbfcfe);
+      min-height: 340px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .mini-chart {
+      border: 1px solid #edf1f5;
+      border-radius: 7px;
+      padding: 7px;
+      background: #fbfdff;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: #425166;
+      font-size: 9px;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 34px 1fr 44px;
+      align-items: center;
+      gap: 5px;
+      margin: 4px 0;
+      color: #425166;
+      font-size: 8.5px;
+      line-height: 1.1;
+    }
+
+    .bar {
+      position: relative;
+      height: 12px;
+      border-radius: 999px;
+      background: #e8edf3;
+      overflow: hidden;
+    }
+
+    .bar.tall { height: 15px; }
+    .seg {
+      display: block;
+      height: 100%;
+      float: left;
+    }
+
+    .combo-chart {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      align-items: end;
+      min-height: 138px;
+      padding: 8px 4px 2px;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .year-pair {
+      display: grid;
+      grid-template-rows: 18px 104px 18px;
+      gap: 4px;
+      align-items: end;
+      min-width: 0;
+    }
+
+    .gap-label {
+      text-align: center;
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .columns {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 5px;
+      height: 104px;
+    }
+
+    .vbar {
+      width: 17px;
+      min-height: 3px;
+      border-radius: 4px 4px 2px 2px;
+      overflow: hidden;
+      background: #e8edf3;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .vbar.wide { width: 24px; }
+
+    .vseg {
+      display: block;
+      width: 100%;
+    }
+
+    .year-label {
+      text-align: center;
+      color: #425166;
+      font-size: 8.5px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .sk { background: var(--blue); }
+    .sam { background: var(--amber); }
+    .mu { background: var(--green); }
+    .gpu { background: var(--purple); }
+    .asic { background: var(--cyan); }
+    .phone { background: #7c8aa0; }
+    .pc { background: #9fb3c9; }
+    .essd { background: var(--green); }
+    .other { background: #cbd5e1; }
+    .server { background: var(--blue); }
+    .hbm { background: var(--purple); }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 8px;
+      margin-top: 5px;
+      color: #425166;
+      font-size: 8.5px;
+      line-height: 1.25;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin-right: 3px;
+      vertical-align: middle;
+      background: #94a3b8;
+    }
+
+    .dot.sk { background: var(--blue); }
+    .dot.sam { background: var(--amber); }
+    .dot.mu { background: var(--green); }
+    .dot.gpu { background: var(--purple); }
+    .dot.asic { background: var(--cyan); }
+    .dot.server { background: var(--blue); }
+    .dot.hbm { background: var(--purple); }
+    .dot.essd { background: var(--green); }
+
+    .spark {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin-top: 2px;
     }
 
     table {
@@ -244,41 +379,7 @@
 
     tr:last-child td { border-bottom: none; }
     .num-cell { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    .tight td, .tight th { padding: 4px 4px; }
-    .scroll { overflow-x: auto; }
-    .scroll table { min-width: 720px; }
-
-    .logic-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 7px;
-    }
-
-    .logic-card {
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      padding: 8px;
-      background: linear-gradient(180deg, #fff, #fbfcfe);
-      min-height: 126px;
-    }
-
-    .logic-card h3 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .logic-card ul {
-      margin: 0;
-      padding-left: 14px;
-      color: #425166;
-      font-size: 9.5px;
-      line-height: 1.35;
-    }
-
-    .logic-card li + li { margin-top: 3px; }
+    .tight td, .tight th { padding: 4px; }
 
     .two-col {
       display: grid;
@@ -286,119 +387,44 @@
       gap: 7px;
     }
 
-    .pie-grid {
+    .flow {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 5px;
+      margin-bottom: 7px;
     }
 
-    .pie-card {
+    .flow span {
       border: 1px solid var(--line);
       border-radius: 7px;
-      padding: 8px;
-      background: linear-gradient(180deg, #fff, #fbfcfe);
-    }
-
-    .pie-wrap {
-      display: grid;
-      grid-template-columns: 78px 1fr;
-      gap: 8px;
-      align-items: center;
-      margin-top: 7px;
-    }
-
-    .pie {
-      width: 76px;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid #d9e2ec;
-    }
-
-    .pie.hbm {
-      background: conic-gradient(var(--blue) 0 58%, var(--amber) 58% 79%, var(--green) 79% 100%);
-    }
-
-    .pie.dram {
-      background: conic-gradient(var(--amber) 0 38%, var(--blue) 38% 67%, var(--green) 67% 89%, #94a3b8 89% 100%);
-    }
-
-    .pie.nand {
-      background: conic-gradient(var(--amber) 0 29%, var(--blue) 29% 47%, var(--green) 47% 60%, #7c8aa0 60% 74%, #b6c0cc 74% 87%, #94a3b8 87% 100%);
-    }
-
-    .legend {
-      display: grid;
-      gap: 4px;
-      font-size: 9px;
+      padding: 6px;
+      background: #fbfdff;
       color: #425166;
+      font-size: 9px;
+      line-height: 1.25;
+      font-weight: 750;
+      min-height: 44px;
+    }
+
+    .risk-ladder {
+      display: grid;
+      gap: 5px;
+    }
+
+    .level {
+      display: grid;
+      grid-template-columns: 78px 1fr 58px;
+      gap: 6px;
+      align-items: center;
+      border: 1px solid #edf1f5;
+      border-radius: 7px;
+      padding: 6px;
+      background: #fbfdff;
+      font-size: 9px;
       line-height: 1.25;
     }
 
-    .legend i {
-      display: inline-flex;
-      align-items: center;
-      font-style: normal;
-    }
-
-    .memory-chart {
-      max-width: 360px;
-      margin: 0 auto 7px;
-      border: 1px solid var(--line);
-      border-radius: 7px;
-      background: #fbfdff;
-      padding: 4px 6px 2px;
-    }
-
-    .memory-chart svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .chart-label {
-      fill: var(--muted);
-      font-size: 8px;
-    }
-
-    .chart-value {
-      fill: #425166;
-      font-size: 7px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .legend span {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-right: 4px;
-      background: #94a3b8;
-      flex: 0 0 auto;
-    }
-
-    .dot.blue { background: var(--blue); }
-    .dot.green { background: var(--green); }
-    .dot.amber { background: var(--amber); }
-    .dot.gray { background: #94a3b8; }
-
-    .placeholder {
-      min-height: 72px;
-      display: grid;
-      place-items: center;
-      border: 1px dashed #cbd5e1;
-      border-radius: 7px;
-      color: var(--muted);
-      background: #fbfdff;
-      font-size: 11px;
-      font-weight: 750;
-    }
+    .level b { font-variant-numeric: tabular-nums; }
 
     .footer {
       margin-top: 8px;
@@ -408,14 +434,13 @@
     }
 
     @media (max-width: 1180px) {
-      .top, .main { grid-template-columns: 1fr; }
-      .quote-grid, .logic-grid, .pie-grid { grid-template-columns: 1fr 1fr; }
+      .top, .main, .forecast-grid { grid-template-columns: 1fr; }
+      .quote-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 760px) {
       .page { padding: 8px; }
-      .quote-grid, .logic-grid, .two-col, .metric-grid, .pie-grid { grid-template-columns: 1fr; }
-      .pe-strip { grid-template-columns: 1fr; }
+      .quote-grid, .metric-grid, .two-col, .flow { grid-template-columns: 1fr; }
       h1 { font-size: 23px; }
     }
   </style>
@@ -426,60 +451,223 @@
       <div class="panel">
         <div class="kicker">Company One-Pager</div>
         <h1>SK Hynix</h1>
-        <p class="subtitle">000660.KS / SKHY · DRAM / NAND / HBM · 资料基于《面板（初）—海力士.xlsx》重排</p>
+        <p class="subtitle">000660.KS / SKHY · DRAM / NAND / HBM · 供需、长协、杠杆、盈利框架</p>
         <div class="badges">
-          <span class="badge green">核心：HBM 供给领先</span>
-          <span class="badge blue">主线：AI 存储墙</span>
-          <span class="badge amber">风险：高波动 + 杠杆待测</span>
+          <span class="badge green">HBM: 供给仍领先</span>
+          <span class="badge amber">杠杆: ETF 负 Gamma</span>
+          <span class="badge blue">盈利: ASP 上行敏感</span>
         </div>
       </div>
 
       <div class="panel">
         <div class="section-title">
-          <h2>行情快照 / 估值</h2>
-          <span class="asof">行情口径：2026-07-10；PE 按用户指定 26-28E 净利润</span>
+          <h2>行情与风险快照</h2>
+          <span class="asof">行情口径：2026-07-14 盘中公开报价</span>
         </div>
         <div class="quote-grid">
-          <div>
-            <h3>当前价格</h3>
-            <div class="price">
-              <span class="num">$170 ADR</span>
-              <span class="chg">首日高波动</span>
-            </div>
-            <div class="metric-grid">
-              <div class="metric"><span>市值</span><b>约 $1.03T</b><small>约 ₩1,442T</small></div>
-              <div class="metric"><span>vs Micron</span><b>0.91x</b><small>MU 约 $1.13T</small></div>
-              <div class="metric"><span>TTM PE</span><b>待校验</b><small>接行情源后更新</small></div>
-              <div class="metric"><span>流动性</span><b>ADR 起量</b><small>韩国本地 + ADR 双口径</small></div>
-            </div>
-          </div>
-          <div>
-            <h3>2026-2028E 净利润与对应 PE</h3>
-            <div class="pe-strip">
-              <div class="pe-card"><span>2026E 净利润</span><b>₩226T / $161.4B</b><small>PE 6.4x</small></div>
-              <div class="pe-card"><span>2027E 净利润</span><b>₩325T / $232.5B</b><small>PE 4.4x</small></div>
-              <div class="pe-card"><span>2028E 净利润</span><b>₩359T / $256.5B</b><small>PE 4.0x</small></div>
-            </div>
-            <p class="note">若利润口径实际为 22.6 / 32.5 / 35.9 万亿韩元，则对应 PE 需整体上调 10 倍；当前先按需求文本原值落表。</p>
-          </div>
-          <div>
-            <h3>技术分析结果</h3>
-            <div class="metric-grid">
-              <div class="metric amber"><span>60D 波动率</span><b>高</b><small>涨幅后回撤敏感，仓位折扣</small></div>
-              <div class="metric green"><span>均线位置</span><b>价 &gt; MA60</b><small>中期趋势仍在</small></div>
-              <div class="metric amber"><span>短期均线</span><b>价 ≈ MA20</b><small>追高胜率下降</small></div>
-              <div class="metric red"><span>回撤观察</span><b>MA60</b><small>跌破触发杠杆风险复核</small></div>
-            </div>
-          </div>
+          <div class="metric"><span>韩国正股</span><b>约 ₩1.84-1.89M</b><small>日内低点 ₩1.76M</small></div>
+          <div class="metric"><span>52 周区间</span><b>₩245k-2.987M</b><small>6/25 高点后进入高波动</small></div>
+          <div class="metric"><span>杠杆 ETF 成交贡献</span><b>12.43%</b><small>熔断日升至 14.7%</small></div>
+          <div class="metric"><span>券商融资工具</span><b>₩55.3T</b><small>约总市值 1.0%</small></div>
         </div>
       </div>
 
       <div class="panel">
         <div class="section-title">
-          <h2>杠杆资金风险测算</h2>
-          <span class="tag amber">暂空</span>
+          <h2>杠杆资金测算</h2>
+          <span class="tag red">高波动</span>
         </div>
-        <div class="placeholder">预留：融资余额、期权 Gamma、外资净买入、券商集中度</div>
+        <div class="risk-ladder">
+          <div class="level"><b>12.43%</b><span>杠杆 ETF 成交贡献；熔断日升至 14.7%。</span><span class="tag amber">再平衡</span></div>
+          <div class="level"><b>₩1.76M</b><span>7/14 盘中低点，跌破后观察 ETF 净值损耗和平仓压力。</span><span class="tag red">观察</span></div>
+          <div class="level"><b>₩1.60M</b><span>下档情景支撑，约为当前低点再下 9%-10%。</span><span class="tag amber">支撑</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-bottom:8px">
+      <div class="section-title">
+        <h2>供给和需求预测</h2>
+        <span class="asof">2025-2028E；供给来自海力士/三星/美光等出货位元，需求来自 Excel 自下而上模型</span>
+      </div>
+      <div class="forecast-grid">
+        <article class="forecast-card">
+          <h3>HBM</h3>
+          <div class="mini-grid">
+            <div class="mini-chart">
+              <div class="chart-head"><span>供给 vs 需求 / 缺口（EB）</span><span>供给为三家 HBM bit，需求为 GPU+ASIC 出货位元</span></div>
+              <div class="combo-chart">
+                <div class="year-pair">
+                  <div class="gap-label">GAP +3%</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:30%"><i class="vseg sk" style="height:64%"></i><i class="vseg sam" style="height:21%"></i><i class="vseg mu" style="height:15%"></i></div>
+                    <div class="vbar" style="height:30%"><i class="vseg gpu" style="height:85%"></i><i class="vseg asic" style="height:15%"></i></div>
+                  </div>
+                  <div class="year-label">25E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP -1%</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:52%"><i class="vseg sk" style="height:47%"></i><i class="vseg sam" style="height:35%"></i><i class="vseg mu" style="height:18%"></i></div>
+                    <div class="vbar" style="height:52%"><i class="vseg gpu" style="height:72%"></i><i class="vseg asic" style="height:28%"></i></div>
+                  </div>
+                  <div class="year-label">26E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP -7%</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:65%"><i class="vseg sk" style="height:46%"></i><i class="vseg sam" style="height:35%"></i><i class="vseg mu" style="height:19%"></i></div>
+                    <div class="vbar" style="height:69%"><i class="vseg gpu" style="height:69%"></i><i class="vseg asic" style="height:31%"></i></div>
+                  </div>
+                  <div class="year-label">27E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP -24%</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:76%"><i class="vseg sk" style="height:44%"></i><i class="vseg sam" style="height:35%"></i><i class="vseg mu" style="height:22%"></i></div>
+                    <div class="vbar" style="height:100%"><i class="vseg gpu" style="height:66%"></i><i class="vseg asic" style="height:34%"></i></div>
+                  </div>
+                  <div class="year-label">28E</div>
+                </div>
+              </div>
+              <div class="legend"><span><i class="dot sk"></i>SK供给</span><span><i class="dot sam"></i>Samsung</span><span><i class="dot mu"></i>Micron</span><span><i class="dot gpu"></i>GPU需求</span><span><i class="dot asic"></i>ASIC</span></div>
+            </div>
+            <div class="mini-chart">
+              <div class="chart-head"><span>AI 加速器出货颗数（M 颗）/ 总量 YoY</span><span>NVDA+AMD+ASIC</span></div>
+              <div class="combo-chart">
+                <div class="year-pair">
+                  <div class="gap-label">+38%</div>
+                  <div class="columns"><div class="vbar wide" style="height:45%"><i class="vseg sk" style="height:64%"></i><i class="vseg mu" style="height:8%"></i><i class="vseg asic" style="height:28%"></i></div></div>
+                  <div class="year-label">25E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">+48%</div>
+                  <div class="columns"><div class="vbar wide" style="height:66%"><i class="vseg sk" style="height:56%"></i><i class="vseg mu" style="height:7%"></i><i class="vseg asic" style="height:37%"></i></div></div>
+                  <div class="year-label">26E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">+28%</div>
+                  <div class="columns"><div class="vbar wide" style="height:84%"><i class="vseg sk" style="height:51%"></i><i class="vseg mu" style="height:8%"></i><i class="vseg asic" style="height:41%"></i></div></div>
+                  <div class="year-label">27E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">+19%</div>
+                  <div class="columns"><div class="vbar wide" style="height:100%"><i class="vseg sk" style="height:49%"></i><i class="vseg mu" style="height:8%"></i><i class="vseg asic" style="height:43%"></i></div></div>
+                  <div class="year-label">28E</div>
+                </div>
+              </div>
+              <div class="legend"><span><i class="dot sk"></i>NVDA</span><span><i class="dot mu"></i>AMD</span><span><i class="dot asic"></i>ASIC</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="forecast-card">
+          <h3>DRAM</h3>
+          <div class="mini-grid">
+            <div class="mini-chart">
+              <div class="chart-head"><span>供给 vs 需求 / 缺口（EB）</span><span>供给为三家 Total DRAM，需求为总 DRAM</span></div>
+              <div class="combo-chart">
+                <div class="year-pair">
+                  <div class="gap-label">GAP +2.2</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:58%"><i class="vseg sk" style="height:33%"></i><i class="vseg sam" style="height:41%"></i><i class="vseg mu" style="height:26%"></i></div>
+                    <div class="vbar" style="height:55%"><i class="vseg server" style="height:36%"></i><i class="vseg hbm" style="height:5%"></i><i class="vseg phone" style="height:30%"></i><i class="vseg pc" style="height:11%"></i><i class="vseg other" style="height:17%"></i></div>
+                  </div>
+                  <div class="year-label">25E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +4.1</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:69%"><i class="vseg sk" style="height:34%"></i><i class="vseg sam" style="height:41%"></i><i class="vseg mu" style="height:25%"></i></div>
+                    <div class="vbar" style="height:62%"><i class="vseg server" style="height:40%"></i><i class="vseg hbm" style="height:10%"></i><i class="vseg phone" style="height:23%"></i><i class="vseg pc" style="height:11%"></i><i class="vseg other" style="height:17%"></i></div>
+                  </div>
+                  <div class="year-label">26E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +5.9</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:81%"><i class="vseg sk" style="height:35%"></i><i class="vseg sam" style="height:41%"></i><i class="vseg mu" style="height:23%"></i></div>
+                    <div class="vbar" style="height:72%"><i class="vseg server" style="height:44%"></i><i class="vseg hbm" style="height:13%"></i><i class="vseg phone" style="height:17%"></i><i class="vseg pc" style="height:10%"></i><i class="vseg other" style="height:16%"></i></div>
+                  </div>
+                  <div class="year-label">27E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +8.1</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:100%"><i class="vseg sk" style="height:35%"></i><i class="vseg sam" style="height:41%"></i><i class="vseg mu" style="height:24%"></i></div>
+                    <div class="vbar" style="height:87%"><i class="vseg server" style="height:44%"></i><i class="vseg hbm" style="height:16%"></i><i class="vseg phone" style="height:15%"></i><i class="vseg pc" style="height:10%"></i><i class="vseg other" style="height:15%"></i></div>
+                  </div>
+                  <div class="year-label">28E</div>
+                </div>
+              </div>
+              <div class="legend"><span><i class="dot sk"></i>SK供给</span><span><i class="dot sam"></i>Samsung</span><span><i class="dot mu"></i>Micron</span><span><i class="dot server"></i>Server</span><span><i class="dot hbm"></i>HBM</span></div>
+            </div>
+            <div class="mini-chart">
+              <div class="chart-head"><span>需求结构柱状图 / 总需求 YoY</span><span>服务器+HBM 占比持续提升</span></div>
+              <div class="combo-chart">
+                <div class="year-pair"><div class="gap-label">+19%</div><div class="columns"><div class="vbar wide" style="height:63%"><i class="vseg server" style="height:36%"></i><i class="vseg hbm" style="height:5%"></i><i class="vseg phone" style="height:30%"></i><i class="vseg pc" style="height:11%"></i><i class="vseg other" style="height:17%"></i></div></div><div class="year-label">25E</div></div>
+                <div class="year-pair"><div class="gap-label">+14%</div><div class="columns"><div class="vbar wide" style="height:72%"><i class="vseg server" style="height:40%"></i><i class="vseg hbm" style="height:10%"></i><i class="vseg phone" style="height:23%"></i><i class="vseg pc" style="height:11%"></i><i class="vseg other" style="height:17%"></i></div></div><div class="year-label">26E</div></div>
+                <div class="year-pair"><div class="gap-label">+15%</div><div class="columns"><div class="vbar wide" style="height:83%"><i class="vseg server" style="height:44%"></i><i class="vseg hbm" style="height:13%"></i><i class="vseg phone" style="height:17%"></i><i class="vseg pc" style="height:10%"></i><i class="vseg other" style="height:16%"></i></div></div><div class="year-label">27E</div></div>
+                <div class="year-pair"><div class="gap-label">+21%</div><div class="columns"><div class="vbar wide" style="height:100%"><i class="vseg server" style="height:44%"></i><i class="vseg hbm" style="height:16%"></i><i class="vseg phone" style="height:15%"></i><i class="vseg pc" style="height:10%"></i><i class="vseg other" style="height:15%"></i></div></div><div class="year-label">28E</div></div>
+              </div>
+              <p class="note">数据中心需求成为 DRAM 结构迁移主线；HBM bit 占比小但耗晶圆约 3x。</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="forecast-card">
+          <h3>NAND</h3>
+          <div class="mini-grid">
+            <div class="mini-chart">
+              <div class="chart-head"><span>供给 vs 需求 / 缺口（EB）</span><span>供给不含中国产能</span></div>
+              <div class="combo-chart">
+                <div class="year-pair">
+                  <div class="gap-label">GAP +146</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:56%"><i class="vseg sam" style="height:35%"></i><i class="vseg other" style="height:31%"></i><i class="vseg sk" style="height:20%"></i><i class="vseg mu" style="height:14%"></i></div>
+                    <div class="vbar" style="height:48%"><i class="vseg phone" style="height:24%"></i><i class="vseg pc" style="height:22%"></i><i class="vseg essd" style="height:25%"></i><i class="vseg other" style="height:29%"></i></div>
+                  </div>
+                  <div class="year-label">25E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +247</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:67%"><i class="vseg sam" style="height:34%"></i><i class="vseg other" style="height:32%"></i><i class="vseg sk" style="height:20%"></i><i class="vseg mu" style="height:14%"></i></div>
+                    <div class="vbar" style="height:52%"><i class="vseg phone" style="height:18%"></i><i class="vseg pc" style="height:21%"></i><i class="vseg essd" style="height:32%"></i><i class="vseg other" style="height:29%"></i></div>
+                  </div>
+                  <div class="year-label">26E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +343</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:81%"><i class="vseg sam" style="height:33%"></i><i class="vseg other" style="height:33%"></i><i class="vseg sk" style="height:19%"></i><i class="vseg mu" style="height:14%"></i></div>
+                    <div class="vbar" style="height:61%"><i class="vseg phone" style="height:14%"></i><i class="vseg pc" style="height:20%"></i><i class="vseg essd" style="height:38%"></i><i class="vseg other" style="height:27%"></i></div>
+                  </div>
+                  <div class="year-label">27E</div>
+                </div>
+                <div class="year-pair">
+                  <div class="gap-label">GAP +471</div>
+                  <div class="columns">
+                    <div class="vbar" style="height:100%"><i class="vseg sam" style="height:33%"></i><i class="vseg other" style="height:34%"></i><i class="vseg sk" style="height:20%"></i><i class="vseg mu" style="height:14%"></i></div>
+                    <div class="vbar" style="height:72%"><i class="vseg phone" style="height:14%"></i><i class="vseg pc" style="height:19%"></i><i class="vseg essd" style="height:42%"></i><i class="vseg other" style="height:25%"></i></div>
+                  </div>
+                  <div class="year-label">28E</div>
+                </div>
+              </div>
+              <div class="legend"><span><i class="dot sam"></i>Samsung</span><span><i class="dot sk"></i>SK</span><span><i class="dot mu"></i>Micron</span><span><i class="dot essd"></i>eSSD</span></div>
+            </div>
+            <div class="mini-chart">
+              <div class="chart-head"><span>需求结构柱状图 / 总需求 YoY</span><span>eSSD 接棒手机</span></div>
+              <div class="combo-chart">
+                <div class="year-pair"><div class="gap-label">+15%</div><div class="columns"><div class="vbar wide" style="height:66%"><i class="vseg phone" style="height:24%"></i><i class="vseg pc" style="height:22%"></i><i class="vseg essd" style="height:25%"></i><i class="vseg other" style="height:29%"></i></div></div><div class="year-label">25E</div></div>
+                <div class="year-pair"><div class="gap-label">+10%</div><div class="columns"><div class="vbar wide" style="height:72%"><i class="vseg phone" style="height:18%"></i><i class="vseg pc" style="height:21%"></i><i class="vseg essd" style="height:32%"></i><i class="vseg other" style="height:29%"></i></div></div><div class="year-label">26E</div></div>
+                <div class="year-pair"><div class="gap-label">+16%</div><div class="columns"><div class="vbar wide" style="height:84%"><i class="vseg phone" style="height:14%"></i><i class="vseg pc" style="height:20%"></i><i class="vseg essd" style="height:38%"></i><i class="vseg other" style="height:27%"></i></div></div><div class="year-label">27E</div></div>
+                <div class="year-pair"><div class="gap-label">+19%</div><div class="columns"><div class="vbar wide" style="height:100%"><i class="vseg phone" style="height:14%"></i><i class="vseg pc" style="height:19%"></i><i class="vseg essd" style="height:42%"></i><i class="vseg other" style="height:25%"></i></div></div><div class="year-label">28E</div></div>
+              </div>
+              <p class="note">eSSD 需求 2025-2028E 为 200/290/400/520EB，2028E 占比约 42%。</p>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -487,136 +675,45 @@
       <div class="stack">
         <div class="panel">
           <div class="section-title">
-            <h2>投资逻辑：需求预测</h2>
-            <span class="asof">2025-2028E；全部改为 YoY 增速口径</span>
+            <h2>盈利预测与PE</h2>
+            <span class="asof">单位：万亿韩元；PE 按当前市值约 ₩1,340T</span>
           </div>
-          <div class="logic-grid">
-            <article class="logic-card">
-              <h3>HBM <span class="tag green">核心弹性</span></h3>
-              <ul>
-                <li>HBM 总需求 YoY：+119% / +82% / +63% / +39%。</li>
-                <li>AI 加速卡出货 YoY：+40% / +37% / +28% / +19%。</li>
-                <li>GPU 单卡 HBM 容量 YoY：+59% / +37% / +29% / +16%。</li>
-                <li>ASIC 占比继续抬升：19% → 29%，稀释但不改高增趋势。</li>
-              </ul>
-            </article>
-            <article class="logic-card">
-              <h3>DRAM <span class="tag blue">数据中心化</span></h3>
-              <ul>
-                <li>DRAM 总需求 YoY：+19% / +13% / +16% / +19%。</li>
-                <li>服务器 DRAM 需求 YoY：+24% / +26% / +27% / +22%。</li>
-                <li>手机 DRAM 需求 YoY：+10% / -14% / -14% / +11%。</li>
-                <li>结构结论：服务器+HBM 占比 41% → 59%。</li>
-              </ul>
-            </article>
-            <article class="logic-card">
-              <h3>NAND <span class="tag amber">eSSD 接棒</span></h3>
-              <ul>
-                <li>NAND 总需求 YoY：+15% / +10% / +16% / +19%。</li>
-                <li>eSSD 需求 YoY：+33% / +45% / +38% / +30%。</li>
-                <li>手机 NAND 需求 YoY：+9% / -19% / -8% / +16%。</li>
-                <li>结构结论：eSSD 占比 25% → 42%，成为主增量。</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="section-title">
-            <h2>存储供给预测：Byte 与 Wafer 增速</h2>
-            <span class="asof">2025E-2030E；全部为 YoY</span>
-          </div>
-          <div class="scroll">
-            <table class="tight">
-              <thead>
-                <tr><th>DRAM Byte YoY</th><th class="num-cell">25E</th><th class="num-cell">26E</th><th class="num-cell">27E</th><th class="num-cell">28E</th><th class="num-cell">29E</th><th class="num-cell">30E</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>海力士 Total / HBM</td><td class="num-cell">+19% / +90%</td><td class="num-cell">+24% / +25%</td><td class="num-cell">+21% / +21%</td><td class="num-cell">+23% / +13%</td><td class="num-cell">+29% / +23%</td><td class="num-cell">+17% / +12%</td></tr>
-                <tr><td>三星 Total / HBM</td><td class="num-cell">+9% / +56%</td><td class="num-cell">+17% / +174%</td><td class="num-cell">+20% / +26%</td><td class="num-cell">+23% / +17%</td><td class="num-cell">+19% / +22%</td><td class="num-cell">+11% / +9%</td></tr>
-                <tr><td>美光 Total / HBM</td><td class="num-cell">+22% / +322%</td><td class="num-cell">+13% / +114%</td><td class="num-cell">+11% / +36%</td><td class="num-cell">+24% / +32%</td><td class="num-cell">+26% / +35%</td><td class="num-cell">+23% / +12%</td></tr>
-                <tr><td>Total DRAM / HBM</td><td class="num-cell">+15% / +96%</td><td class="num-cell">+18% / +70%</td><td class="num-cell">+18% / +25%</td><td class="num-cell">+23% / +18%</td><td class="num-cell">+24% / +25%</td><td class="num-cell">+16% / +11%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="scroll" style="margin-top:6px">
-            <table class="tight">
-              <thead>
-                <tr><th>DRAM Wafer YoY</th><th class="num-cell">25E</th><th class="num-cell">26E</th><th class="num-cell">27E</th><th class="num-cell">28E</th><th class="num-cell">29E</th><th class="num-cell">30E</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>海力士 Total / HBM</td><td class="num-cell">+26% / +69%</td><td class="num-cell">+15% / +29%</td><td class="num-cell">+13% / +31%</td><td class="num-cell">+14% / +26%</td><td class="num-cell">+16% / +17%</td><td class="num-cell">+8% / +14%</td></tr>
-                <tr><td>三星 Total / HBM</td><td class="num-cell">+6% / +63%</td><td class="num-cell">+3% / +24%</td><td class="num-cell">+9% / +24%</td><td class="num-cell">+12% / +23%</td><td class="num-cell">+8% / +16%</td><td class="num-cell">+3% / +12%</td></tr>
-                <tr><td>美光 Total / HBM</td><td class="num-cell">+6% / +171%</td><td class="num-cell">+5% / +97%</td><td class="num-cell">+10% / +53%</td><td class="num-cell">+19% / +39%</td><td class="num-cell">+18% / +28%</td><td class="num-cell">+14% / +15%</td></tr>
-                <tr><td>Total DRAM / HBM</td><td class="num-cell">+12% / +74%</td><td class="num-cell">+8% / +35%</td><td class="num-cell">+11% / +32%</td><td class="num-cell">+14% / +27%</td><td class="num-cell">+13% / +19%</td><td class="num-cell">+8% / +14%</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="scroll" style="margin-top:6px">
-            <table class="tight">
-              <thead>
-                <tr><th>NAND Byte / Wafer YoY</th><th class="num-cell">25E</th><th class="num-cell">26E</th><th class="num-cell">27E</th><th class="num-cell">28E</th><th class="num-cell">29E</th><th class="num-cell">30E</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>三星</td><td class="num-cell">+3% / +1%</td><td class="num-cell">+15% / -15%</td><td class="num-cell">+20% / +5%</td><td class="num-cell">+21% / +6%</td><td class="num-cell">+19% / +4%</td><td class="num-cell">+19% / +4%</td></tr>
-                <tr><td>铠侠+闪迪</td><td class="num-cell">+16% / -2%</td><td class="num-cell">+23% / -1%</td><td class="num-cell">+25% / +11%</td><td class="num-cell">+26% / +11%</td><td class="num-cell">+28% / +14%</td><td class="num-cell">+24% / +8%</td></tr>
-                <tr><td>海力士</td><td class="num-cell">+14% / +11%</td><td class="num-cell">+18% / +1%</td><td class="num-cell">+17% / +2%</td><td class="num-cell">+27% / +14%</td><td class="num-cell">+28% / +11%</td><td class="num-cell">+21% / +0%</td></tr>
-                <tr><td>美光</td><td class="num-cell">+26% / +0%</td><td class="num-cell">+21% / -7%</td><td class="num-cell">+22% / +9%</td><td class="num-cell">+20% / +16%</td><td class="num-cell">+18% / +9%</td><td class="num-cell">+17% / +1%</td></tr>
-                <tr><td>Total</td><td class="num-cell">+12% / +2%</td><td class="num-cell">+19% / -7%</td><td class="num-cell">+21% / +7%</td><td class="num-cell">+24% / +10%</td><td class="num-cell">+24% / +10%</td><td class="num-cell">+21% / +4%</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="section-title">
-            <h2>内存墙：算力速度 vs 存储带宽速度</h2>
-            <span class="asof">以 2014 K80 = 1；曲线为倍数，纵轴用压缩比例展示</span>
-          </div>
-          <div class="memory-chart">
-            <svg viewBox="0 0 520 170" role="img" aria-label="算力倍数和带宽倍数曲线图">
-              <line x1="30" y1="142" x2="495" y2="142" stroke="#d8e0e8" />
-              <line x1="30" y1="20" x2="30" y2="142" stroke="#d8e0e8" />
-              <polyline points="30,140 95,127 160,90 225,72 290,50 355,50 420,35 485,20" fill="none" stroke="#2266d1" stroke-width="2.5" />
-              <polyline points="30,140 95,127 160,127 225,114 290,103 355,96 420,87 485,78" fill="none" stroke="#b87412" stroke-width="2.5" />
-              <g fill="#2266d1">
-                <circle cx="30" cy="140" r="3" /><circle cx="95" cy="127" r="3" /><circle cx="160" cy="90" r="3" /><circle cx="225" cy="72" r="3" />
-                <circle cx="290" cy="50" r="3" /><circle cx="355" cy="50" r="3" /><circle cx="420" cy="35" r="3" /><circle cx="485" cy="20" r="3" />
-              </g>
-              <g fill="#b87412">
-                <circle cx="30" cy="140" r="3" /><circle cx="95" cy="127" r="3" /><circle cx="160" cy="127" r="3" /><circle cx="225" cy="114" r="3" />
-                <circle cx="290" cy="103" r="3" /><circle cx="355" cy="96" r="3" /><circle cx="420" cy="87" r="3" /><circle cx="485" cy="78" r="3" />
-              </g>
-              <text x="382" y="24" class="chart-label" fill="#2266d1">算力倍数</text>
-              <text x="382" y="82" class="chart-label" fill="#b87412">带宽倍数</text>
-              <text x="24" y="158" class="chart-label">2014</text>
-              <text x="89" y="158" class="chart-label">2016</text>
-              <text x="154" y="158" class="chart-label">2017</text>
-              <text x="219" y="158" class="chart-label">2020</text>
-              <text x="284" y="158" class="chart-label">2022</text>
-              <text x="349" y="158" class="chart-label">2024</text>
-              <text x="414" y="158" class="chart-label">B200</text>
-              <text x="476" y="158" class="chart-label">2026E</text>
-              <text x="483" y="16" class="chart-value">575x</text>
-              <text x="483" y="75" class="chart-value">27x</text>
-            </svg>
+          <div class="flow">
+            <span>26Q1 实际收入 52.58；按经营利润 37.61 反推公式成本 10.79</span>
+            <span>26Q2E 收入=52.58×1.4；成本环比持平</span>
+            <span>26E 收入=52.58×5.76；成本=10.79×4</span>
+            <span>27E 收入=52.58×8.74；成本=10.79×5.2</span>
+            <span>净利=(经营利润+投资损益)×0.85；投资损益按 26Q1 隐含值年化</span>
           </div>
           <table class="tight">
             <thead>
-              <tr><th>芯片</th><th>年份</th><th class="num-cell">算力 TFLOPS</th><th class="num-cell">带宽 TB/s</th><th class="num-cell">FLOPS/Byte</th><th class="num-cell">算力累计</th><th class="num-cell">带宽累计</th></tr>
+              <tr><th>期间</th><th class="num-cell">收入</th><th class="num-cell">成本</th><th class="num-cell">经营利润</th><th class="num-cell">净利润</th><th class="num-cell">PE</th><th>备注</th></tr>
             </thead>
             <tbody>
-              <tr><td>K80</td><td>2014</td><td class="num-cell">8.7</td><td class="num-cell">0.5</td><td class="num-cell">18</td><td class="num-cell">1x</td><td class="num-cell">1x</td></tr>
-              <tr><td>P100</td><td>2016</td><td class="num-cell">21.2</td><td class="num-cell">0.7</td><td class="num-cell">29</td><td class="num-cell">2x</td><td class="num-cell">2x</td></tr>
-              <tr><td>V100</td><td>2017</td><td class="num-cell">125</td><td class="num-cell">0.9</td><td class="num-cell">139</td><td class="num-cell">14x</td><td class="num-cell">2x</td></tr>
-              <tr><td>A100</td><td>2020</td><td class="num-cell">312</td><td class="num-cell">2.0</td><td class="num-cell">153</td><td class="num-cell">36x</td><td class="num-cell">4x</td></tr>
-              <tr><td>H100</td><td>2022</td><td class="num-cell">989</td><td class="num-cell">3.4</td><td class="num-cell">295</td><td class="num-cell">114x</td><td class="num-cell">7x</td></tr>
-              <tr><td>H200</td><td>2024</td><td class="num-cell">989</td><td class="num-cell">4.8</td><td class="num-cell">206</td><td class="num-cell">114x</td><td class="num-cell">10x</td></tr>
-              <tr><td>B200</td><td>2024</td><td class="num-cell">2,250</td><td class="num-cell">8.0</td><td class="num-cell">281</td><td class="num-cell">259x</td><td class="num-cell">17x</td></tr>
-              <tr><td>Rubin</td><td>2026E</td><td class="num-cell">5,000</td><td class="num-cell">13.0</td><td class="num-cell">385</td><td class="num-cell">575x</td><td class="num-cell">27x</td></tr>
+              <tr><td>26Q1</td><td class="num-cell">52.58</td><td class="num-cell">10.79</td><td class="num-cell">37.61</td><td class="num-cell">40.35</td><td class="num-cell">—</td><td>实际值；投资损益隐含约 9.86</td></tr>
+              <tr><td>26Q2E</td><td class="num-cell">73.61</td><td class="num-cell">10.79</td><td class="num-cell">56.54</td><td class="num-cell">56.43</td><td class="num-cell">—</td><td>ASP +40%，量持平</td></tr>
+              <tr><td>26E</td><td class="num-cell">302.84</td><td class="num-cell">43.15</td><td class="num-cell">233.72</td><td class="num-cell">232.17</td><td class="num-cell pe-red">5.8x</td><td>H2 ASP=1.68×26Q1</td></tr>
+              <tr><td>27E</td><td class="num-cell">459.52</td><td class="num-cell">56.09</td><td class="num-cell">363.08</td><td class="num-cell">342.13</td><td class="num-cell pe-red">3.9x</td><td>价持平、量 +30%</td></tr>
             </tbody>
           </table>
-          <p class="note" style="margin-top:6px">2014→2024 B200：算力累计约 259x，带宽约 17x；若 Rubin 兑现，2014→2026E 算力约 575x、带宽约 27x。</p>
+        </div>
+
+        <div class="panel">
+          <div class="section-title">
+            <h2>LTA 进展与锁量</h2>
+            <span class="asof">表格可视化；Excel 长协比率 sheet</span>
+          </div>
+          <table class="tight">
+            <thead><tr><th>公司/时间</th><th>锁量或事件</th><th>解读</th></tr></thead>
+            <tbody>
+              <tr><td>SK hynix / 2025-10</td><td>2026 DRAM/HBM/NAND 产能已被客户锁定</td><td><span class="tag green">扩散至全内存</span></td></tr>
+              <tr><td>SK hynix / 2026-07</td><td>DDR bit 约 18%；60%-70% 出货量被锁定</td><td><span class="tag blue">议价力强</span></td></tr>
+              <tr><td>韩国媒体 / 2026-04</td><td>LTA 通常含 10%-30% 预付款</td><td>预付款支持 CapEx，降低现金流波动</td></tr>
+              <tr><td>Micron / 2026-06</td><td>16 份 SCA，通常 2026-2030 五年期；若完成，约一半或更多收入来自 SCA</td><td>DRAM 20%、NAND 33%、DDR bit 20%</td></tr>
+              <tr><td>SK/Samsung / 2026-07</td><td>长协从一年延长到 3-5 年；海力士可能取消价格上限</td><td><span class="tag amber">周期性削弱</span></td></tr>
+              <tr><td>Samsung / 2026-07</td><td>DDR bit 约 30%</td><td>锁量较高但 HBM 领先度低于 SK</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -624,75 +721,20 @@
         <div class="panel">
           <div class="section-title">
             <h2>竞争格局与领先窗口</h2>
-            <span class="asof">Q1 2026 收入口径市占率；饼图</span>
-          </div>
-          <div class="pie-grid">
-            <article class="pie-card">
-              <h3>HBM</h3>
-              <div class="pie-wrap">
-                <div class="pie hbm" aria-label="HBM market share pie"></div>
-                <div class="legend">
-                  <span><i><b class="dot blue"></b>SK hynix</i><b>58%</b></span>
-                  <span><i><b class="dot amber"></b>Samsung</i><b>21%</b></span>
-                  <span><i><b class="dot green"></b>Micron</i><b>21%</b></span>
-                </div>
-              </div>
-            </article>
-            <article class="pie-card">
-              <h3>DRAM</h3>
-              <div class="pie-wrap">
-                <div class="pie dram" aria-label="DRAM market share pie"></div>
-                <div class="legend">
-                  <span><i><b class="dot amber"></b>Samsung</i><b>38%</b></span>
-                  <span><i><b class="dot blue"></b>SK hynix</i><b>29%</b></span>
-                  <span><i><b class="dot green"></b>Micron</i><b>22%</b></span>
-                  <span><i><b class="dot gray"></b>Others</i><b>11%</b></span>
-                </div>
-              </div>
-            </article>
-            <article class="pie-card">
-              <h3>NAND</h3>
-              <div class="pie-wrap">
-                <div class="pie nand" aria-label="NAND market share pie"></div>
-                <div class="legend">
-                  <span><i><b class="dot amber"></b>Samsung</i><b>29%</b></span>
-                  <span><i><b class="dot blue"></b>SK hynix</i><b>18%</b></span>
-                  <span><i><b class="dot green"></b>Micron</i><b>13%</b></span>
-                  <span><i><b class="dot gray"></b>Others</i><b>40%</b></span>
-                </div>
-              </div>
-            </article>
-          </div>
-          <p class="note" style="margin-top:7px">领先窗口判断：SK hynix 在 HBM 收入口径仍有明显领先，但供给 bit 份额从 2026E 47.5% 降至 2030E 43.3%；领先窗口约 12-18 个月，关键变量是 HBM4 认证节奏、LTA 锁量和三星/美光良率爬坡。</p>
-        </div>
-
-        <div class="panel">
-          <div class="section-title">
-            <h2>LTA 进展与占比</h2>
-            <span class="asof">Excel：长协比率</span>
+            <span class="asof">保留判断</span>
           </div>
           <table class="tight">
-            <thead><tr><th>时间</th><th>事件/数据</th><th>含义</th></tr></thead>
+            <thead><tr><th>市场</th><th>SK</th><th>Samsung</th><th>Micron</th><th>判断</th></tr></thead>
             <tbody>
-              <tr><td>2025-10</td><td>SK hynix 称 2026 DRAM/HBM/NAND 产能已被客户锁定。</td><td>锁量从 HBM 扩散至广义内存。</td></tr>
-              <tr><td>2026-04</td><td>韩国媒体称长协通常含 10%-30% 预付款。</td><td>预付款支撑 CapEx，降低周期现金流压力。</td></tr>
-              <tr><td>2026-06</td><td>Micron 披露 16 份 SCA，通常 2026-2030 五年期。</td><td>LTA 制度化；约 20% DRAM 量、约 1/3 NAND 量。</td></tr>
-              <tr><td>2026-07</td><td>SK hynix/Samsung 长协从一年延长到 3-5 年；海力士或取消价格上限。</td><td>供应商议价能力增强，周期性被削弱。</td></tr>
+              <tr><td>HBM Q1 2026 收入口径</td><td class="num-cell">58%</td><td class="num-cell">21%</td><td class="num-cell">21%</td><td>SK 仍领先。</td></tr>
+              <tr><td>HBM bit 份额 26E→30E</td><td class="num-cell">47.5%→43.3%</td><td class="num-cell">34.7%→33.1%</td><td class="num-cell">17.8%→23.6%</td><td>领先窗口约 12-18 个月。</td></tr>
             </tbody>
           </table>
-        </div>
-
-        <div class="panel">
-          <div class="section-title">
-            <h2>盈利计算公式</h2>
-            <span class="tag amber">暂空</span>
-          </div>
-          <div class="placeholder">预留：收入 = bit 出货 × 每 GB ASP；毛利 = 收入 × margin；净利 = EBIT - 税费 - 少数股东</div>
         </div>
       </div>
     </section>
 
-    <p class="footer">注：需求/供给/竞争/LTA/内存墙来自用户提供 Excel。行情、市值、技术分析当前作为面板口径展示，后续可接实时行情源后自动刷新。</p>
+    <p class="footer">资料：用户 Excel《面板（初）—海力士.xlsx》、华泰策略 PDF《如何看待韩股未来走势？》、用户图片“韩国杠杆 ETF 流动性周度跟踪”，以及公开行情页面。图中缺口=供给-需求。</p>
   </main>
 </body>
 </html>
